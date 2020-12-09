@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "user": {
+    "id": "ab12dcac-b488-4bc9-a5ef-c62049f28905",
+    "name": null,
+    "username": null,
+    "email": "usman.faisal61@gmail.com",
+    "organization": null,
+    "picture": null,
+    "createdAt": "2020-11-22T07:01:40.837Z",
+    "updatedAt": "2020-11-22T07:01:40.837Z"
+  },
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFiMTJkY2FjLWI0ODgtNGJjOS1hNWVmLWM2MjA0OWYyODkwNSIsIm5hbWUiOm51bGwsInVzZXJuYW1lIjpudWxsLCJlbWFpbCI6InVzbWFuLmZhaXNhbDYxQGdtYWlsLmNvbSIsIm9yZ2FuaXphdGlvbiI6bnVsbCwicGljdHVyZSI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMC0xMS0yMlQwNzowMTo0MC44MzdaIiwidXBkYXRlZEF0IjoiMjAyMC0xMS0yMlQwNzowMTo0MC44MzdaIn0.3g2hWOhDO0sdkQC1r3ZJMTHyAGXkJkvMBFjK7nDTH20"
+}
