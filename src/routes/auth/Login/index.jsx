@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
@@ -19,9 +19,10 @@ const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUserData(data.user);
   }, [userData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -34,23 +35,8 @@ const Login = (props) => {
         alert("Login Successful!");
       })
       .catch((error) => alert(error.toString()));
-    // await apis
-    //   .login()
-    //   .then((response) => {
-    //     const checkUser = response.data.user;
-    //     if (email === checkUser.email) {
-    //       dispatch(signInUser({ user }));
-    //       setTimeout(() => {
-    //         setIsLoading(false);
-    //         props.history.replace("/dashboard");
-    //       }, 2000);
-    //     } else {
-    //       alert("Invalid email");
-    //       setIsLoading(false);
-    //     }
-    //   })
-    //   .catch((error) => alert(error.toString()));
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") {
@@ -59,6 +45,7 @@ const Login = (props) => {
       setPassword(value);
     }
   };
+
   return (
     <form
       className='form-signin'

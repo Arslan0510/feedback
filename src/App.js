@@ -6,12 +6,10 @@ import firebase from "firebase";
 import { history } from "./helpers";
 import store from "./store/store";
 import Routes from "./routes";
-import firebaseConfig from "./firebase";
+import { firebaseConfig } from "./services";
 import "./App.css";
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+firebase.initializeApp(firebaseConfig);
 
 const App = () => {
   return (
