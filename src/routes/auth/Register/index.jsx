@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
-import AppLogo from "../../assets/logo.png";
+import AppLogo from "../../../assets/logo.png";
 import "./register.css";
 
-export default function Register() {
+const Register = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +39,7 @@ export default function Register() {
       </div>
 
       <div className='form-label-group'>
-        <label htmlFor='inputEmail'>User Name</label>
+        <label htmlFor='inputName'>User Name</label>
         <input
           type='text'
           name='username'
@@ -64,7 +64,6 @@ export default function Register() {
           value={email}
           onChange={handleChange}
           required
-          autoFocus
         />
       </div>
 
@@ -99,7 +98,9 @@ export default function Register() {
         </div>
       </button>
       {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
-      <p className='mt-5 mb-3 text-muted text-center'>&copy; 2017-2020</p>
+      <p className='mt-5 mb-3 text-muted text-center'>&copy; 2020</p>
     </form>
   );
-}
+};
+
+export default Register;

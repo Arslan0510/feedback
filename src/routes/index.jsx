@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
 import Dashboard from "./app-flow/Dashboard";
-import Login from "../containers/Login";
+import Login from "./auth/Login";
 import Register from "./auth/Register";
 
-export default function index() {
+const index = () => {
   return (
     <Switch>
       <Route exact path='/dashboard' component={Dashboard} />
@@ -14,4 +14,6 @@ export default function index() {
       {<Redirect from='/' to='/login' />}
     </Switch>
   );
-}
+};
+
+export default index;

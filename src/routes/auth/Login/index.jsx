@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
 
-import AppLogo from "../../assets/logo.png";
-import data from "../../services/mocks/user.json";
-import { signInUser } from "../../store/actions/users";
+import AppLogo from "../../../assets/logo.png";
+import data from "../../../services/mocks/user.json";
+import { signInUser } from "../../../store/actions/users";
 
 import "./login.css";
 
-export default function Login(props) {
+const Login = (props) => {
   const [userData, setUserData] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -107,4 +107,6 @@ export default function Login(props) {
       <p className='mt-5 mb-3 text-muted text-center'>&copy; 2020</p>
     </form>
   );
-}
+};
+
+export default Login;
