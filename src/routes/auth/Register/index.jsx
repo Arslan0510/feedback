@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 
 import AppLogo from "../../../assets/logo.png";
 import { apis } from "../../../services/apis";
+import firebase from "firebase";
 import "./register.css";
 
 const Register = () => {
@@ -16,12 +17,18 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // await apis.register({ regUser }).then((response) => {
-    //   console.log(
-    //     "🚀 ~ file: index.jsx ~ line 20 ~ awaitapis.register ~ response",
-    //     response
-    //   );
-    // });
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        setIsLoading(false);
+        console.log("response firebase: ", res);
+        alert("Registered Successful!");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        alert(error.toString());
+      });
   };
   const handleChange = (e) => {
     const { name, value } = e.target;

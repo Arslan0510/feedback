@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
+import firebase from "firebase";
 
 import AppLogo from "../../../assets/logo.png";
 import data from "../../../services/mocks/user.json";
@@ -25,22 +26,30 @@ const Login = (props) => {
     e.preventDefault();
     setIsLoading(true);
     const user = { email: email, password: password };
-    await apis
-      .login()
-      .then((response) => {
-        const checkUser = response.data.user;
-        if (email === checkUser.email) {
-          dispatch(signInUser({ user }));
-          setTimeout(() => {
-            setIsLoading(false);
-            props.history.replace("/dashboard");
-          }, 2000);
-        } else {
-          alert("Invalid email");
-          setIsLoading(false);
-        }
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        console.log("response firebase: ", res);
+        alert("Login Successful!");
       })
       .catch((error) => alert(error.toString()));
+    // await apis
+    //   .login()
+    //   .then((response) => {
+    //     const checkUser = response.data.user;
+    //     if (email === checkUser.email) {
+    //       dispatch(signInUser({ user }));
+    //       setTimeout(() => {
+    //         setIsLoading(false);
+    //         props.history.replace("/dashboard");
+    //       }, 2000);
+    //     } else {
+    //       alert("Invalid email");
+    //       setIsLoading(false);
+    //     }
+    //   })
+    //   .catch((error) => alert(error.toString()));
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
