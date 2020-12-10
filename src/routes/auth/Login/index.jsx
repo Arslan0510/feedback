@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import AppLogo from "../../../assets/logo.png";
 import data from "../../../services/mocks/user.json";
 import { signInUser } from "../../../store/actions/users";
+import { apis } from "../../../services/apis";
 
 import "./login.css";
 
@@ -20,20 +21,26 @@ const Login = (props) => {
   React.useEffect(() => {
     setUserData(data.user);
   }, [userData]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const user = { email: email, password: password };
-    if (email === userData.email) {
-      dispatch(signInUser({ user }));
-      setTimeout(() => {
-        setIsLoading(false);
-        props.history.replace("/dashboard");
-      }, 2000);
-    } else {
-      alert("Invalid email");
-      setIsLoading(false);
-    }
+    await apis
+      .login()
+      .then((response) => {
+        const checkUser = response.data.user;
+        if (email === checkUser.email) {
+          dispatch(signInUser({ user }));
+          setTimeout(() => {
+            setIsLoading(false);
+            props.history.replace("/dashboard");
+          }, 2000);
+        } else {
+          alert("Invalid email");
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => alert(error.toString()));
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,6 +67,7 @@ const Login = (props) => {
       </div>
 
       <div className='form-label-group'>
+        <label htmlFor='inputEmail'>Email address</label>
         <input
           type='email'
           id='inputEmail'
@@ -71,10 +79,10 @@ const Login = (props) => {
           required
           autoFocus
         />
-        <label htmlFor='inputEmail'>Email address</label>
       </div>
 
       <div className='form-label-group'>
+        <label htmlFor='inputPassword'>Password</label>
         <input
           type='password'
           id='inputPassword'
@@ -85,7 +93,6 @@ const Login = (props) => {
           onChange={handleChange}
           required
         />
-        <label htmlFor='inputPassword'>Password</label>
       </div>
       <div className='checkbox mb-3'>
         <label>

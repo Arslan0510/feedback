@@ -11,7 +11,16 @@ export class index extends Component {
     this.setState({ email: user.email, password: user.password });
   }
   render() {
-    return <div className='container'>Welcome, {this.state.email}</div>;
+    return (
+      <div className='container'>
+        <h2>Welcome, {this.state.email}</h2>
+        <button
+          className='btn btn-danger'
+          onClick={() => this.props.history.replace("/login")}>
+          Logout
+        </button>
+      </div>
+    );
   }
 }
 

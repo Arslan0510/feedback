@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
 import AppLogo from "../../../assets/logo.png";
+import { apis } from "../../../services/apis";
 import "./register.css";
 
 const Register = () => {
@@ -12,8 +13,15 @@ const Register = () => {
   const [errors, setErrors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+    // await apis.register({ regUser }).then((response) => {
+    //   console.log(
+    //     "🚀 ~ file: index.jsx ~ line 20 ~ awaitapis.register ~ response",
+    //     response
+    //   );
+    // });
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
