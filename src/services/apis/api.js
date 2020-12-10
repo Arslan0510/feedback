@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { environment } from "./environment";
-import { user } from "../mocks";
 
 const api = (endPoint, data) => {
   endPoint.data = data;
@@ -13,6 +12,7 @@ const api = (endPoint, data) => {
       break;
   }
 };
+
 export default api;
 
 export const axiosGet = async ({ testData }) => {
@@ -33,10 +33,10 @@ export const axiosPost = async ({
     data,
     isGuarded
       ? {
-          headers: {
-            Authorization: "ak " + environment.key,
-          },
-        }
+        headers: {
+          Authorization: "Bearer " + environment.key,
+        },
+      }
       : null
   );
 };

@@ -1,40 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
-import { useDispatch } from "react-redux";
-import firebase from "firebase";
-
 import AppLogo from "../../../assets/logo.png";
 import data from "../../../services/mocks/user.json";
-import { signInUser } from "../../../store/actions/users";
-import { apis } from "../../../services/apis";
-
 import "./login.css";
+import { signIn } from "../../../store/actions";
 
-const Login = (props) => {
+const Login = () => {
   const [userData, setUserData] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setUserData(data.user);
   }, [userData]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const user = { email: email, password: password };
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log("response firebase: ", res);
-        alert("Login Successful!");
-      })
-      .catch((error) => alert(error.toString()));
+    setLoading(true);
+    signIn({
+      data: { email, password },
+      cbSuccess: () => {
+        setLoading(false)
+      },
+      cbFailure: (err) => {
+        setLoading(false);
+        if (err) setError(err);
+      }
+    })
   };
 
   const handleChange = (e) => {
@@ -102,11 +97,11 @@ const Login = (props) => {
             color='#fff'
             size={25}
             css={{ marginLeft: 10 }}
-            loading={isLoading}
+            loading={loading}
           />
         </div>
       </button>
-      {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
+      {error ? <p style={{ color: "red" }}>{error}</p> : null}
       <p className='mt-5 mb-3 text-muted text-center'>&copy; 2020</p>
     </form>
   );

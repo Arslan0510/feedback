@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
-
 import AppLogo from "../../../assets/logo.png";
-import { apis } from "../../../services/apis";
-import firebase from "firebase";
 import "./register.css";
+import { signUp } from "../../../store/actions/auth";
+
 
 const Register = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        setIsLoading(false);
-        console.log("response firebase: ", res);
-        alert("Registered Successful!");
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        alert(error.toString());
-      });
+    setLoading(true);
+    signUp({
+      data: { userName, email, password },
+      cbSuccess: () => setLoading(false),
+      cbFailure: (err) => {
+        setLoading(false);
+        if (err) setError(err);
+      }
+    });
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "username") {
@@ -108,11 +104,11 @@ const Register = () => {
             color='#fff'
             size={30}
             css={{ marginLeft: 10 }}
-            loading={isLoading}
+            loading={loading}
           />
         </div>
       </button>
-      {errors ? <p style={{ color: "red" }}>{errors}</p> : null}
+      {error ? <p style={{ color: "red" }}>{error}</p> : null}
       <p className='mt-5 mb-3 text-muted text-center'>&copy; 2020</p>
     </form>
   );
