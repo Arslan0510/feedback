@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
 import AppLogo from "../../../assets/logo.png";
-import { signUp } from "../../../store/actions/auth";
 import "./register.css";
+import { signUp } from "../../../store/actions";
 
 const Register = () => {
   const [userName, setUserName] = useState("");
