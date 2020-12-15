@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { routes } from "../services";
+
 import Dashboard from "./app-flow/Dashboard";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import { routes } from "../services";
 
 const index = () => {
   return (

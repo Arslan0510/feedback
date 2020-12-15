@@ -9,7 +9,7 @@ import Routes from "./routes";
 import { firebaseConfig } from "./services";
 import "./App.css";
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 const App = () => {
   return (

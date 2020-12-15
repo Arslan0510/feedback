@@ -6,10 +6,12 @@ export class index extends Component {
     email: "",
     password: "",
   };
+
   componentDidMount() {
     const user = this.props.userData;
     this.setState({ email: user.email, password: user.password });
   }
+
   render() {
     return (
       <div className='container'>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+
 import AppLogo from "../../../assets/logo.png";
 import data from "../../../services/mocks/user.json";
-import "./login.css";
 import { signIn } from "../../../store/actions";
+import "./login.css";
 
 const Login = () => {
   const [userData, setUserData] = useState("");
@@ -22,14 +23,12 @@ const Login = () => {
     setLoading(true);
     signIn({
       data: { email, password },
-      cbSuccess: () => {
-        setLoading(false)
-      },
+      cbSuccess: () => setLoading(false),
       cbFailure: (err) => {
         setLoading(false);
         if (err) setError(err);
-      }
-    })
+      },
+    });
   };
 
   const handleChange = (e) => {
