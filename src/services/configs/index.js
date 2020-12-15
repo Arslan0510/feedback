@@ -11,6 +11,7 @@ export const routes = {
   login: "/login",
   register: "/register",
   dashboard: "/dashboard",
+  feedback: "/feedback",
 };
 
 export const colors = {

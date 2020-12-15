@@ -15,9 +15,24 @@ const api = (endPoint, data) => {
 
 export default api;
 
-export const axiosGet = async ({ testData }) => {
+export const axiosGet = async ({
+  address: route,
+  data,
+  guarded: isGuarded,
+  testData,
+}) => {
   //   console.log("[LINK TO BE APPROACHED] GET", testData);
   if (environment.mock) if (testData) return await mockAPI(testData);
+  return await Axios.get(
+    route + (data ? data : ""),
+    isGuarded
+      ? {
+          headers: {
+            Authorization: "ak " + environment.key,
+          },
+        }
+      : null
+  );
 };
 
 export const axiosPost = async ({
@@ -33,10 +48,10 @@ export const axiosPost = async ({
     data,
     isGuarded
       ? {
-        headers: {
-          Authorization: "Bearer " + environment.key,
-        },
-      }
+          headers: {
+            Authorization: "Bearer " + environment.key,
+          },
+        }
       : null
   );
 };

@@ -11,12 +11,12 @@ const Sidebar = () => {
         {/* <li class='header'>Navigation</li> */}
         <li>
           <Link to='/dashboard'>
-            <i class='fa fa-home' aria-hidden='true'></i> Homepage
+            <i class='fa fa-home' aria-hidden='true'></i> Dashboard
           </Link>
         </li>
-        <li className='active'>
-          <Link to='/dashboard'>
-            <i class='fa fa-tachometer' aria-hidden='true'></i> Dashboard
+        <li>
+          <Link to='/feedback'>
+            <i class='fa fa-tachometer' aria-hidden='true'></i> Feedback
           </Link>
         </li>
         {/* <li class='header'>Another Menu</li> */}
