@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Cards, Sidebar } from "../../../components/Dashboard";
+
+import "./dashboard.css";
 
 export class index extends Component {
   state = {
@@ -7,21 +10,25 @@ export class index extends Component {
     password: "",
   };
 
-  componentDidMount() {
-    const user = this.props.userData;
-    this.setState({ email: user.email, password: user.password });
-  }
+  // componentDidMount() {
+  //   const user = this.props.userData;
+  //   this.setState({ email: user.email, password: user.password });
+  // }
 
   render() {
     return (
-      <div className='container'>
-        <h2>Welcome, {this.state.email}</h2>
-        <button
-          className='btn btn-danger'
-          onClick={() => this.props.history.replace("/login")}>
-          Logout
-        </button>
-      </div>
+      <>
+        <Sidebar />
+        <div class='content-container'>
+          <div class='container-fluid'>
+            <h1>Dashboard</h1>
+            <div class='alert alert-danger' role='alert'>
+              This template is under maintenance!
+            </div>
+            <Cards />
+          </div>
+        </div>
+      </>
     );
   }
 }

@@ -12,7 +12,7 @@ const index = () => {
       <Route exact path={routes.dashboard} component={Dashboard} />
       <Route path={routes.login} component={Login} />
       <Route path={routes.register} component={Register} />
-      <Redirect from='/' to={routes.login} />
+      <Redirect from='/' to={routes.dashboard} />
     </Switch>
   );
 };
