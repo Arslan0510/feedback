@@ -6,8 +6,7 @@ export const signIn = async ({ data, cbSuccess, cbFailure }) => {
         const { email, password } = data;
         const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
         const token = await user.getIdToken();
-        console.log('[TOKEN]', token, user.uid);
-        const { data: loginData } = await apis.login({ email, password, token, uid: user.uid });
+        const { data: loginData } = await apis.login({ email, token, uid: user.uid });
         console.log('[LOGIN RESPONSE]', loginData);
         cbSuccess();
     } catch (e) {
@@ -21,7 +20,8 @@ export const signUp = async ({ data, cbSuccess, cbFailure }) => {
         const { email, password } = data;
         const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
         const token = await user.getIdToken();
-        console.log('[TOKEN]', token);
+        const { data: registerData } = await apis.register({ email, token, uid: user.uid });
+        console.log('[SIGNUP RESPONSE]', registerData);
         cbSuccess();
     } catch (e) {
         console.log('[ERROR SIGNING UP]', e);

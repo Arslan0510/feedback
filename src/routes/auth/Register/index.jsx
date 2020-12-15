@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import AppLogo from "../../../assets/logo.png";
 import "./register.css";
-import { signUp } from "../../../store/actions/auth";
+import { signUp } from "../../../store/actions";
 
 
 const Register = () => {
