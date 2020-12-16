@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
-import { Dashboard, Feedback } from "./app-flow";
+import { Dashboard, Feedback, Projects } from "./app-flow";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { routes } from "../services";
-import { Sidebar } from "../components/Dashboard";
+import { Sidebar } from "../components";
 
 const index = () => {
   return (
@@ -16,7 +16,8 @@ const index = () => {
         <Route path={routes.login} component={Login} />
         <Route path={routes.register} component={Register} />
         <Route path={routes.feedback} component={Feedback} />
-        <Redirect from='/' to={routes.feedback} />
+        <Route path={routes.projects} component={Projects} />
+        <Redirect from='/' to={routes.projects} />
       </Switch>
     </>
   );

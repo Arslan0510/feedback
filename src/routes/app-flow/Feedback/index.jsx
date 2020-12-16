@@ -1,38 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
-import * as Yup from "yup";
 
 import { feedback } from "../../../store/actions";
+import InputField from "../../../components/InputField";
+import { validationSchema } from "./validation.schema";
 import "./feedback.css";
 
-const validationSchema = Yup.object().shape({
-  projectName: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .label("Project Name"),
-  developerName: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .label("Developer Name"),
-  developerEmail: Yup.string().email().label("Email"),
-  clientName: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .label("Client Name"),
-  clientEmail: Yup.string().email().label("Email"),
-  teamLeadName: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .label("Team Lead Name"),
-  teamLeadEmail: Yup.string().email().label("Email"),
-  description: Yup.string(),
-});
-
-const index = () => {
+const Feedback = () => {
   const handleSubmit = (values) => {
     feedback({
       data: values,
@@ -44,11 +18,11 @@ const index = () => {
   };
 
   return (
-    <div class='content-container'>
-      <div class='container-fluid'>
+    <div className='content-container'>
+      <div className='container-fluid'>
         <h1>Feedback</h1>
-        <div class='container-contact100'>
-          <div class='wrap-contact100'>
+        <div className='container-contact100'>
+          <div className='wrap-contact100'>
             <Formik
               initialValues={{
                 projectName: "",
@@ -60,7 +34,6 @@ const index = () => {
                 teamLeadEmail: "",
                 description: "",
               }}
-              //   validate={(values) => handleValidate(values)}
               validationSchema={validationSchema}
               onSubmit={(values) => handleSubmit(values)}>
               {({
@@ -71,149 +44,97 @@ const index = () => {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
-                /* and other goodies */
               }) => (
                 <form
-                  class='contact100-form validate-form'
+                  className='contact100-form validate-form'
                   onSubmit={handleSubmit}>
-                  <span class='contact100-form-title'>New Feedback</span>
+                  <span className='contact100-form-title'>New Feedback</span>
 
+                  <InputField
+                    className='wrap-input100 border-0 validate-input bg1'
+                    handleChange={handleChange("projectName")}
+                    errors={errors.projectName}
+                    touched={touched.projectName}
+                    labelName='PROJECT NAME'
+                    placeholder='Enter Project Name'
+                    type='text'
+                    name='projectName'
+                    asterisk={true}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 bg1 rs1-wrap-input100'
+                    handleChange={handleChange("developerName")}
+                    errors={errors.developerName}
+                    touched={touched.developerName}
+                    labelName='Developer Name'
+                    placeholder='Enter Developer Name'
+                    type='text'
+                    name='developerName'
+                    asterisk={true}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
+                    handleChange={handleChange("developerEmail")}
+                    errors={errors.developerEmail}
+                    touched={touched.developerEmail}
+                    labelName='Developer Email'
+                    placeholder='Enter Developer Email'
+                    type='email'
+                    name='developerEmail'
+                    asterisk={false}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 bg1 rs1-wrap-input100'
+                    handleChange={handleChange("clientName")}
+                    errors={errors.clientName}
+                    touched={touched.clientName}
+                    labelName='Client Name'
+                    placeholder='Enter Client Name'
+                    type='text'
+                    name='clientName'
+                    asterisk={true}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
+                    handleChange={handleChange("clientEmail")}
+                    errors={errors.clientEmail}
+                    touched={touched.clientEmail}
+                    labelName='Client Email'
+                    placeholder='Enter Client Email'
+                    type='email'
+                    name='clientEmail'
+                    asterisk={false}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 bg1 rs1-wrap-input100'
+                    handleChange={handleChange("teamLeadName")}
+                    errors={errors.teamLeadName}
+                    touched={touched.teamLeadName}
+                    labelName='Team Lead Name'
+                    placeholder='Enter Team Lead Name'
+                    type='text'
+                    name='teamLeadName'
+                    asterisk={true}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
+                    handleChange={handleChange("teamLeadEmail")}
+                    errors={errors.teamLeadEmail}
+                    touched={touched.teamLeadEmail}
+                    labelName='Team Lead Email'
+                    placeholder='Enter Team Lead Email'
+                    type='email'
+                    name='teamLeadEmail'
+                    asterisk={false}
+                  />
                   <div
-                    class='wrap-input100 validate-input bg1'
-                    data-validate='Please Type Your Name'>
-                    <span class='label-input100'>PROJECT NAME *</span>
-                    <input
-                      class='input100'
-                      type='text'
-                      name='projectName'
-                      onChange={handleChange("projectName")}
-                      placeholder='Enter Project Name'
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.projectName &&
-                        touched.projectName &&
-                        errors.projectName}
-                    </p>
-                  </div>
-
-                  <div class='wrap-input100 bg1 rs1-wrap-input100'>
-                    <span class='label-input100'>Developer Name *</span>
-                    <input
-                      class='input100'
-                      type='text'
-                      name='developerName'
-                      onChange={handleChange("developerName")}
-                      placeholder='Enter Developer Name'
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.developerName &&
-                        touched.developerName &&
-                        errors.developerName}
-                    </p>
-                  </div>
-
-                  <div
-                    class='wrap-input100 validate-input bg1 rs1-wrap-input100'
-                    data-validate='Enter Your Email (e@a.x)'>
-                    <span class='label-input100'>Developer Email</span>
-                    <input
-                      class='input100'
-                      type='email'
-                      name='developerEmail'
-                      onChange={handleChange("developerEmail")}
-                      placeholder='Enter Developer Email '
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.developerEmail &&
-                        touched.developerEmail &&
-                        errors.developerEmail}
-                    </p>
-                  </div>
-
-                  <div className='wrap-divider100'>
-                    <hr className='divider'></hr>
-                  </div>
-
-                  <div class='wrap-input100 bg1 rs1-wrap-input100'>
-                    <span class='label-input100'>Client Name *</span>
-                    <input
-                      class='input100'
-                      type='text'
-                      name='clientName'
-                      onChange={handleChange("clientName")}
-                      placeholder='Enter Client Name'
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.clientName &&
-                        touched.clientName &&
-                        errors.clientName}
-                    </p>
-                  </div>
-
-                  <div
-                    class='wrap-input100 validate-input bg1 rs1-wrap-input100'
-                    data-validate='Enter Your Email (e@a.x)'>
-                    <span class='label-input100'>Client Email</span>
-                    <input
-                      class='input100'
-                      type='email'
-                      name='clientEmail'
-                      onChange={handleChange("clientEmail")}
-                      placeholder='Enter Client Email '
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.clientEmail &&
-                        touched.clientEmail &&
-                        errors.clientEmail}
-                    </p>
-                  </div>
-
-                  <div className='wrap-divider100'>
-                    <hr className='divider'></hr>
-                  </div>
-
-                  <div class='wrap-input100 bg1 rs1-wrap-input100'>
-                    <span class='label-input100'>Team Lead Name *</span>
-                    <input
-                      class='input100'
-                      type='text'
-                      name='teamLeadName'
-                      onChange={handleChange("teamLeadName")}
-                      placeholder='Enter Team Lead Name'
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.teamLeadName &&
-                        touched.teamLeadName &&
-                        errors.teamLeadName}
-                    </p>
-                  </div>
-
-                  <div
-                    class='wrap-input100 validate-input bg1 rs1-wrap-input100'
-                    data-validate='Enter Your Email (e@a.x)'>
-                    <span class='label-input100'>Team Lead Email</span>
-                    <input
-                      class='input100'
-                      type='email'
-                      name='teamLeadEmail'
-                      onChange={handleChange("teamLeadEmail")}
-                      placeholder='Enter Team Lead Email '
-                    />
-                    <p style={{ color: "red" }}>
-                      {errors.teamLeadEmail &&
-                        touched.teamLeadEmail &&
-                        errors.teamLeadEmail}
-                    </p>
-                  </div>
-
-                  <div
-                    class='wrap-input100 validate-input bg0 rs1-alert-validate'
+                    className='wrap-input100 border-0 validate-input bg0 rs1-alert-validate'
                     data-validate='Please Type Your Message'>
-                    <span class='label-input100'>
+                    <span className='label-input100'>
                       Project description (optional)
                     </span>
                     <textarea
-                      class='input100'
+                      className='input100'
                       name='description'
                       onChange={handleChange("description")}
                       placeholder='Your message here...'></textarea>
@@ -224,12 +145,12 @@ const index = () => {
                     </p>
                   </div>
 
-                  <div class='container-contact100-form-btn'>
-                    <button class='contact100-form-btn' type='submit'>
+                  <div className='container-contact100-form-btn'>
+                    <button className='contact100-form-btn' type='submit'>
                       <span>
                         Generate Project Feedback&nbsp;&nbsp;
                         <i
-                          class='fa fa-long-arrow-right m-l-7'
+                          className='fa fa-long-arrow-right m-l-7'
                           aria-hidden='true'></i>
                       </span>
                     </button>
@@ -244,4 +165,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Feedback;

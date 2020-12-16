@@ -12,6 +12,7 @@ export const routes = {
   register: "/register",
   dashboard: "/dashboard",
   feedback: "/feedback",
+  projects: "/projects",
 };
 
 export const colors = {

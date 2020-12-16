@@ -1,16 +1,18 @@
 import React from "react";
 
+import img from "../../assets/setting.png";
+
 const Cards = () => {
   return (
-    <div class='card' style={{ width: 300 }}>
-      <div class='card-body'>
+    <div className='card' style={{ width: 300 }}>
+      <div className='card-body'>
         <div className='row'>
           <div className='col-md-6'>
             <h6>$153.000</h6>
             <p>Revenue</p>
           </div>
-          <div className='col-md-6'>
-            <i class='fa fa-home' aria-hidden='true' style={{ fontSize: 50 }} />
+          <div className='col-md-3'>
+            <img alt='' src={img} width={100} height={100} />
           </div>
         </div>
       </div>
