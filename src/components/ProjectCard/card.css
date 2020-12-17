@@ -11,7 +11,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  border-bottom: 5px solid #000;
+  border-bottom: 5px solid #00c2c7;
+  cursor: pointer;
 }
 
 .Content {
@@ -20,7 +21,7 @@
   justify-content: space-between;
   align-items: flex-end;
   color: white;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .Title {
@@ -28,12 +29,15 @@
   font-weight: 900;
   display: block;
   margin-bottom: 8px;
-  color: #000;
+  color: #212529;
 }
 
 .Subtitle {
   font-size: 14px;
   color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .TagContainer {
@@ -41,8 +45,8 @@
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-  padding: 3px;
-  width: 90px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 3px;
   text-align: center;
   color: white;
@@ -62,10 +66,9 @@
 
 .CTA {
   display: block;
-  margin-top: 20px;
   font-size: 16px;
-  cursor: pointer;
   font-weight: 500;
+  margin-bottom: 0;
 }
 .CTA i {
   margin-left: 10px;

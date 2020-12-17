@@ -103,7 +103,7 @@ const Feedback = () => {
                     placeholder='Enter Client Email'
                     type='email'
                     name='clientEmail'
-                    asterisk={false}
+                    asterisk={true}
                   />
                   <InputField
                     className='wrap-input100 border-0 bg1 rs1-wrap-input100'
@@ -128,7 +128,7 @@ const Feedback = () => {
                     asterisk={false}
                   />
                   <div
-                    className='wrap-input100 border-0 validate-input bg0 rs1-alert-validate'
+                    className='wrap-input100 validate-input bg0 rs1-alert-validate'
                     data-validate='Please Type Your Message'>
                     <span className='label-input100'>
                       Project description (optional)

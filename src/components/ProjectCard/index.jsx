@@ -4,10 +4,9 @@ import "./card.css";
 const ProjectCard = ({
   title,
   projectDesc,
-  titleColor = "white",
-  subtitleColor = "white",
   completed,
   developerName,
+  clientName,
 }) => (
   <div className='Container'>
     {completed ? (
@@ -19,24 +18,19 @@ const ProjectCard = ({
     ) : (
       <div className='Top'>
         <div className='TagContainer' style={{ backgroundColor: "#00c2c7" }}>
-          <div>In Process</div>
+          <div>Awaiting Feedback</div>
         </div>
       </div>
     )}
     {(title || projectDesc) && (
       <div className='Content'>
-        <div>
-          {title && (
-            <h4 className='Title' color={titleColor}>
-              {title}
-            </h4>
+        <div style={{ width: 310 }}>
+          {title && <h4 className='Title'>{title}</h4>}
+          {projectDesc && <p className='Subtitle'>{projectDesc}</p>}
+          {developerName && (
+            <p className='CTA'>Developer Name: {developerName}</p>
           )}
-          {projectDesc && (
-            <p className='Subtitle' color={subtitleColor}>
-              {projectDesc}
-            </p>
-          )}
-          {developerName && <p className='CTA'>{developerName}</p>}
+          {clientName && <p className='CTA'>Client Name: {clientName}</p>}
         </div>
       </div>
     )}

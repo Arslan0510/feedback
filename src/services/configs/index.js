@@ -13,6 +13,7 @@ export const routes = {
   dashboard: "/dashboard",
   feedback: "/feedback",
   projects: "/projects",
+  projectDetails: "/projectDetails",
 };
 
 export const colors = {

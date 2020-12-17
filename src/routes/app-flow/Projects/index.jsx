@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ProjectCard } from "../../../components";
+import { Loader, ProjectCard } from "../../../components";
 import { getAllProjects } from "../../../store/actions";
 
 import "./projects.css";
 
-const Projects = () => {
-  const { projects } = useSelector(state => state.reducer_projects);
+const Projects = (props) => {
+  const { projects } = useSelector((state) => state.reducer_projects);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -16,11 +16,23 @@ const Projects = () => {
       setLoading(true);
       getAllProjects({
         dispatch,
-        cbSuccess: () => { setLoading(false); },
-        cbFailure: () => { setLoading(false); },
+        cbSuccess: () => {
+          setLoading(false);
+        },
+        cbFailure: () => {
+          setLoading(false);
+        },
       });
     }
   }, []);
+
+  const handleClick = (id) => {
+    props.history.push(`/projectDetails/${id}`);
+  };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className='content-container'>
@@ -29,12 +41,16 @@ const Projects = () => {
         <div className='row'>
           {projects &&
             projects.map((project) => (
-              <div className='col-sm-4' key={project.id}>
+              <div
+                className='col-sm-4'
+                key={project.id}
+                onClick={() => handleClick(project.id)}>
                 <ProjectCard
                   title={project.projectName}
                   projectDesc={project.projectDescription}
                   completed={project.isCompleted}
                   developerName={project.developerName}
+                  clientName={project.clientName}
                 />
               </div>
             ))}
