@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ProjectCard } from "../../../components";
-import { apis } from "../../../services";
+import { getAllProjects } from "../../../store/actions";
 
 import "./projects.css";
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-
-  const gettingData = async () => {
-    const { data } = await apis.projects();
-    setProjects(data.feedbacks);
-  };
+  const { projects } = useSelector(state => state.reducer_projects);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    gettingData();
-    return () => null;
+    if (projects.length === 0) {
+      setLoading(true);
+      getAllProjects({
+        dispatch,
+        cbSuccess: () => { setLoading(false); },
+        cbFailure: () => { setLoading(false); },
+      });
+    }
   }, []);
 
   return (
