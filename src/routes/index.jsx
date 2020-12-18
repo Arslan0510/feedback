@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { Dashboard, Feedback, Projects, ProjectDetails } from "./app-flow";
 import Login from "./auth/Login";
@@ -11,6 +12,17 @@ const index = () => {
   return (
     <>
       <Sidebar />
+      <ToastContainer
+        position='bottom-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Switch>
         <Route exact path={routes.dashboard} component={Dashboard} />
         <Route path={routes.login} component={Login} />

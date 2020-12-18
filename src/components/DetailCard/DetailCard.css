@@ -51,7 +51,7 @@
   border-radius: 3px;
   background: linear-gradient(60deg, #00c2c7, #009195);
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(0, 194, 199, 1);
+    0 7px 10px -5px rgba(0, 194, 199, 0.5);
   margin: -15px 15px;
   position: relative;
 }
