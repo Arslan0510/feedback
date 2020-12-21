@@ -6,7 +6,7 @@ import "./sidebar.css";
 const Sidebar = () => {
   return (
     <div className='sidebar-container'>
-      <div className='sidebar-logo'>Simple Admin</div>
+      <div className='sidebar-logo'>Feedback</div>
       <ul className='sidebar-navigation'>
         {/* <li className='header'>Navigation</li> */}
         <li>

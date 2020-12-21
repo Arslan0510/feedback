@@ -17,7 +17,7 @@ export const validationSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required")
     .label("Client Name"),
-  clientEmail: Yup.string().required().email().label("Email"),
+  clientEmail: Yup.string().required("Required").email().label("Email"),
   teamLeadName: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")

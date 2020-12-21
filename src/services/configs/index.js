@@ -19,4 +19,6 @@ export const routes = {
 export const colors = {
   sidebarHeader: "#009195",
   appColor: "#00c2c7",
+  black: "#212529",
+  green: "#5cb85c",
 };

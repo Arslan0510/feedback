@@ -42,8 +42,8 @@
   text-align: "center";
 }
 .cardChart p {
-  margin-top: "0px";
-  padding-top: "0px";
+  margin-top: 0px;
+  padding-top: 0px;
 }
 .cardHeader {
   padding: 15px;
@@ -79,9 +79,10 @@
   color: #000;
   border: none;
   margin: 0.3125rem 1px;
-  padding: 12px 30px;
+  padding: 10px 12px;
   position: relative;
   font-size: 12px;
+  width: 222px;
   min-width: auto;
   min-height: auto;
   text-align: center;
@@ -92,6 +93,13 @@
   touch-action: manipulation;
   border-radius: 3px;
   letter-spacing: 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
   vertical-align: middle;
+}
+.footerItems p {
+  color: #212529;
+  margin-bottom: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

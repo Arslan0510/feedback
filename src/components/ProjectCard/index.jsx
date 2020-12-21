@@ -1,4 +1,6 @@
 import React from "react";
+
+import { colors } from "../../services/configs";
 import "./card.css";
 
 const ProjectCard = ({
@@ -11,13 +13,15 @@ const ProjectCard = ({
   <div className='Container'>
     {completed ? (
       <div className='Top'>
-        <div className='TagContainer' style={{ backgroundColor: "#5cb85c" }}>
+        <div className='TagContainer' style={{ backgroundColor: colors.green }}>
           <div>Completed</div>
         </div>
       </div>
     ) : (
       <div className='Top'>
-        <div className='TagContainer' style={{ backgroundColor: "#00c2c7" }}>
+        <div
+          className='TagContainer'
+          style={{ backgroundColor: colors.appColor }}>
           <div>Awaiting Feedback</div>
         </div>
       </div>

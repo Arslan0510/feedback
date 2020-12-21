@@ -18,16 +18,25 @@ const DetailCard = ({ project }) => {
           </div>
           <div className='cardFooter'>
             <div>
-              <h6>Developer Name</h6>
-              <div className='footerItems'>{project.developerName}</div>
+              <h6>Developer</h6>
+              <div className='footerItems'>
+                <p>{project.developerName}</p>
+                <p>{project.developerEmail}</p>
+              </div>
             </div>
             <div>
-              <h6>Team Lead Name</h6>
-              <div className='footerItems'>{project.teamLeadName}</div>
+              <h6>Team Lead</h6>
+              <div className='footerItems'>
+                <p>{project.teamLeadName}</p>
+                <p>{project.teamLeadEmail}</p>
+              </div>
             </div>
             <div>
-              <h6>Client Name</h6>
-              <div className='footerItems'>{project.clientName}</div>
+              <h6>Client</h6>
+              <div className='footerItems'>
+                <p>{project.clientName}</p>
+                <p>{project.clientEmail}</p>
+              </div>
             </div>
           </div>
         </div>

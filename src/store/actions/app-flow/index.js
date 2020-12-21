@@ -16,11 +16,11 @@ export const getAllProjects = async ({ cbSuccess, cbFailure, dispatch }) => {
     const { data } = await apis.projects();
     dispatch({
       type: SET_PROJECTS,
-      payload: data.feedbacks
+      payload: data.feedbacks,
     });
     cbSuccess();
   } catch (e) {
     console.log("[ERROR GETTING ALL PROJECTS]", e);
     cbFailure();
   }
-}
+};
