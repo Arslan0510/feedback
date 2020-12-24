@@ -44,23 +44,12 @@ const Feedback = () => {
     // });
   };
 
-  const onChange = (i, e) => {
-    let values = [...this.state.values];
-    values[i] = e.target.value;
-    this.setState({ values });
-  };
-
   const appendDeveloperSection = (e, errors, touched) => {
     e.preventDefault();
     setCount(count + 1);
     setDeveloperSection([
       ...developerSection,
-      <AddDeveloper
-        onChange={onChange}
-        errors={errors}
-        touched={touched}
-        count={count}
-      />,
+      <AddDeveloper errors={errors} touched={touched} count={count} />,
     ]);
   };
 
@@ -132,8 +121,10 @@ const Feedback = () => {
                     name='developerEmail'
                     asterisk={false}
                   />
+
                   {developerSection.length !== 0 &&
                     developerSection.map((child) => child)}
+
                   <div className='container-add-developer-form-btn'>
                     <button
                       className='add-developer-form-btn'
@@ -146,6 +137,7 @@ const Feedback = () => {
                       </span>
                     </button>
                   </div>
+
                   <InputField
                     className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                     handleChange={handleChange("clientName")}
