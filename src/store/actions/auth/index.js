@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { apis } from "../../../services";
+import { apis, memoryStrings } from "../../../services";
 
 export const signIn = async ({ data, cbSuccess, cbFailure }) => {
   try {
@@ -13,11 +13,10 @@ export const signIn = async ({ data, cbSuccess, cbFailure }) => {
       token,
       uid: user.uid,
     });
-    console.log("[LOGIN RESPONSE]", loginData);
+    localStorage.setItem(memoryStrings.authorizationToken, loginData.token);
     cbSuccess();
   } catch (e) {
-    console.log("[ERROR SIGNING IN]", e);
-    cbFailure("Incorrect email or password");
+    cbFailure(e.message);
   }
 };
 
@@ -33,10 +32,9 @@ export const signUp = async ({ data, cbSuccess, cbFailure }) => {
       token,
       uid: user.uid,
     });
-    console.log("[SIGNUP RESPONSE]", registerData);
-    cbSuccess();
+    localStorage.setItem(memoryStrings.authorizationToken, registerData.token);
+    cbSuccess(registerData);
   } catch (e) {
-    console.log("[ERROR SIGNING UP]", e);
-    cbFailure();
+    cbFailure(e.message);
   }
 };

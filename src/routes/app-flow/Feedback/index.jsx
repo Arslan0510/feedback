@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
 
@@ -6,34 +6,62 @@ import { feedback } from "../../../store/actions";
 import InputField from "../../../components/InputField";
 import { validationSchema } from "./validation.schema";
 import "./feedback.css";
+import AddDeveloper from "../../../components/AddDeveloper";
 
 const Feedback = () => {
+  const [developerSection, setDeveloperSection] = useState([]);
+  const [count, setCount] = useState(2);
+
   const handleSubmit = (values) => {
-    feedback({
-      data: values,
-      cbSuccess: () => {
-        toast.success("🦄 Feedback noted!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      },
-      cbFailure: (err) => {
-        toast.error(err, {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      },
-    });
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 16 ~ handleSubmit ~ values",
+      values
+    );
+    // feedback({
+    //   data: values,
+    //   cbSuccess: () => {
+    //     toast.success("🦄 Feedback noted!", {
+    //       position: "bottom-center",
+    //       autoClose: 3000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //     });
+    //   },
+    //   cbFailure: (err) => {
+    //     toast.error(err, {
+    //       position: "bottom-center",
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //     });
+    //   },
+    // });
+  };
+
+  const onChange = (i, e) => {
+    let values = [...this.state.values];
+    values[i] = e.target.value;
+    this.setState({ values });
+  };
+
+  const appendDeveloperSection = (e, errors, touched) => {
+    e.preventDefault();
+    setCount(count + 1);
+    setDeveloperSection([
+      ...developerSection,
+      <AddDeveloper
+        onChange={onChange}
+        errors={errors}
+        touched={touched}
+        count={count}
+      />,
+    ]);
   };
 
   return (
@@ -51,6 +79,8 @@ const Feedback = () => {
                 clientEmail: "",
                 teamLeadName: "",
                 teamLeadEmail: "",
+                projectManagerName: "",
+                projectManagerEmail: "",
                 description: "",
               }}
               validationSchema={validationSchema}
@@ -102,6 +132,20 @@ const Feedback = () => {
                     name='developerEmail'
                     asterisk={false}
                   />
+                  {developerSection.length !== 0 &&
+                    developerSection.map((child) => child)}
+                  <div className='container-add-developer-form-btn'>
+                    <button
+                      className='add-developer-form-btn'
+                      onClick={(e) =>
+                        appendDeveloperSection(e, handleChange, errors, touched)
+                      }>
+                      <span>
+                        Add More Developers&nbsp;&nbsp;
+                        <i className='fa fa-plus m-l-7' aria-hidden='true'></i>
+                      </span>
+                    </button>
+                  </div>
                   <InputField
                     className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                     handleChange={handleChange("clientName")}
@@ -144,6 +188,28 @@ const Feedback = () => {
                     placeholder='Enter Team Lead Email'
                     type='email'
                     name='teamLeadEmail'
+                    asterisk={false}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 bg1 rs1-wrap-input100'
+                    handleChange={handleChange("projectManagerName")}
+                    errors={errors.teamLeadName}
+                    touched={touched.teamLeadName}
+                    labelName='Project Manager Name'
+                    placeholder='Enter Project Manager Name'
+                    type='text'
+                    name='projectManagerName'
+                    asterisk={true}
+                  />
+                  <InputField
+                    className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
+                    handleChange={handleChange("projectManagerEmail")}
+                    errors={errors.teamLeadEmail}
+                    touched={touched.teamLeadEmail}
+                    labelName='Project Manager Email'
+                    placeholder='Enter Project Manager Email'
+                    type='email'
+                    name='projectManagerEmail'
                     asterisk={false}
                   />
                   <div

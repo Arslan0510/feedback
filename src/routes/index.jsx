@@ -8,10 +8,9 @@ import Register from "./auth/Register";
 import { routes } from "../services";
 import { Sidebar } from "../components";
 
-const index = () => {
+const index = ({ isAuthorized }) => {
   return (
     <>
-      <Sidebar />
       <ToastContainer
         position='bottom-center'
         autoClose={5000}
@@ -24,16 +23,25 @@ const index = () => {
         pauseOnHover
       />
       <Switch>
-        <Route exact path={routes.dashboard} component={Dashboard} />
-        <Route path={routes.login} component={Login} />
-        <Route path={routes.register} component={Register} />
-        <Route path={routes.feedback} component={Feedback} />
-        <Route
-          path={`${routes.projectDetails}/:id`}
-          component={ProjectDetails}
-        />
-        <Route path={routes.projects} component={Projects} />
-        <Redirect from='/' to={routes.projects} />
+        {!isAuthorized ? (
+          <>
+            <Route path={routes.login} component={Login} />
+            <Route path={routes.register} component={Register} />
+            <Redirect to={routes.login} />
+          </>
+        ) : (
+          <>
+            <Sidebar />
+            <Route exact path={routes.dashboard} component={Dashboard} />
+            <Route path={routes.feedback} component={Feedback} />
+            <Route
+              path={`${routes.projectDetails}/:id`}
+              component={ProjectDetails}
+            />
+            <Route path={routes.projects} component={Projects} />
+            <Redirect from='/' to={routes.dashboard} />
+          </>
+        )}
       </Switch>
     </>
   );

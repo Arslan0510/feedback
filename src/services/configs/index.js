@@ -22,3 +22,7 @@ export const colors = {
   black: "#212529",
   green: "#5cb85c",
 };
+
+export const memoryStrings = {
+  authorizationToken: "authorizationToken",
+};

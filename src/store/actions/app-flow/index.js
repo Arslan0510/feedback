@@ -20,7 +20,6 @@ export const getAllProjects = async ({ cbSuccess, cbFailure, dispatch }) => {
     });
     cbSuccess();
   } catch (e) {
-    console.log("[ERROR GETTING ALL PROJECTS]", e);
     cbFailure();
   }
 };

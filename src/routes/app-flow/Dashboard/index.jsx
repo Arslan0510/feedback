@@ -1,4 +1,6 @@
 import React from "react";
+import firebase from "firebase";
+
 import { Card } from "../../../components";
 
 import "./dashboard.css";
@@ -12,6 +14,11 @@ const Dashboard = () => {
           This template is under maintenance!
         </div>
         <Card />
+        <button
+          className='btn btn-sm btn-primary'
+          onClick={() => firebase.auth().signOut()}>
+          Sign Out
+        </button>
       </div>
     </div>
   );

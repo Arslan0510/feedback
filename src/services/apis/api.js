@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { memoryStrings } from "../configs";
 import { environment } from "./environment";
 
 const api = (endPoint, data) => {
@@ -28,7 +29,9 @@ export const axiosGet = async ({
     isGuarded
       ? {
           headers: {
-            Authorization: "ak " + environment.key,
+            Authorization:
+              "Bearer " +
+              localStorage.getItem(memoryStrings.authorizationToken),
           },
         }
       : null
@@ -49,7 +52,9 @@ export const axiosPost = async ({
     isGuarded
       ? {
           headers: {
-            Authorization: "Bearer " + environment.key,
+            Authorization:
+              "Bearer " +
+              localStorage.getItem(memoryStrings.authorizationToken),
           },
         }
       : null

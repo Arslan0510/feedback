@@ -283,6 +283,38 @@ textarea.input100 {
   padding-top: 20px;
   width: 100%;
 }
+.container-add-developer-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.add-developer-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  /* width: 25%; */
+  height: 30px;
+  background-color: #333333;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #fff;
+  line-height: 1;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
 
 .contact100-form-btn {
   display: -webkit-box;
@@ -297,11 +329,9 @@ textarea.input100 {
   height: 50px;
   background-color: #333333;
   border-radius: 25px;
-
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
-
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -325,6 +355,24 @@ textarea.input100 {
   -ms-transform: translateX(10px);
   -o-transform: translateX(10px);
   transform: translateX(10px);
+}
+.add-developer-form-btn i {
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.add-developer-form-btn:hover {
+  background-color: #00c2c7;
+}
+
+.add-developer-form-btn:hover i {
+  -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
+  -ms-transform: translateX(5px);
+  -o-transform: translateX(5px);
+  transform: translateX(5px);
 }
 
 /*------------------------------------------------------------------

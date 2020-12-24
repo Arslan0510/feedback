@@ -24,5 +24,6 @@ export const validationSchema = Yup.object().shape({
     .required("Required")
     .label("Team Lead Name"),
   teamLeadEmail: Yup.string().email().label("Email"),
+  projectManagerEmail: Yup.string().email().label("Email"),
   description: Yup.string(),
 });

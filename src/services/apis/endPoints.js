@@ -10,8 +10,8 @@ function endPoint(address, type, guarded, testData) {
 const endPoints = {
   login: new endPoint("/user/login", "POST", false, user),
   register: new endPoint("/user/register", "POST", false, user),
-  feedback: new endPoint("/feedback", "POST", false, user),
-  projects: new endPoint("/projects", "GET", false, projects),
+  feedback: new endPoint("/feedback", "POST", true, user),
+  projects: new endPoint("/feedback", "GET", true, projects),
 };
 
 export default endPoints;

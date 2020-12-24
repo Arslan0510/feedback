@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 import AppLogo from "../../../assets/logo.png";
 import "./register.css";
 import { signUp } from "../../../store/actions";
 
-const Register = () => {
+const Register = ({ history }) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +19,21 @@ const Register = () => {
     setLoading(true);
     signUp({
       data: { userName, email, password },
-      cbSuccess: () => setLoading(false),
+      cbSuccess: (registerData) => {
+        setLoading(false);
+        if (registerData.success) {
+          toast.success("🦄 Register successful!", {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          history.replace("/");
+        }
+      },
       cbFailure: (err) => {
         setLoading(false);
         if (err) setError(err);

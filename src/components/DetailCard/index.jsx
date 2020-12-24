@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Grid } from "@material-ui/core";
 import "./DetailCard.css";
 
 const DetailCard = ({ project }) => {
   return (
     <Grid className='rootContainer'>
-      <Grid xs={12} sm={12} md={8}>
+      <Grid item xs={12} sm={12} md={8}>
         <div className='card'>
           <div className='cardHeader'>
             <h4 className='cardTitleWhite'>{project.projectName}</h4>
@@ -20,8 +20,13 @@ const DetailCard = ({ project }) => {
             <div>
               <h6>Developer</h6>
               <div className='footerItems'>
-                <p>{project.developerName}</p>
-                <p>{project.developerEmail}</p>
+                {project.developers.length !== 0 &&
+                  project.developers.map((developer) => (
+                    <Fragment key={developer.email}>
+                      <p>{developer.name}</p>
+                      <p>{developer.email}</p>
+                    </Fragment>
+                  ))}
               </div>
             </div>
             <div>

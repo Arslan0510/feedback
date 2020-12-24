@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 import AppLogo from "../../../assets/logo.png";
 import data from "../../../services/mocks/user.json";
@@ -23,7 +24,18 @@ const Login = () => {
     setLoading(true);
     signIn({
       data: { email, password },
-      cbSuccess: () => setLoading(false),
+      cbSuccess: () => {
+        toast.success("🦄 Login Successful!", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setLoading(false);
+      },
       cbFailure: (err) => {
         setLoading(false);
         if (err) setError(err);
