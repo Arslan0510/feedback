@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
-
 import { feedback } from "../../../store/actions";
 import InputField from "../../../components/InputField";
-import { validationSchema } from "./validation.schema";
+import { validationSchema, additionalValidation } from "./validation.schema";
 import "./feedback.css";
-import AddDeveloper from "../../../components/AddDeveloper";
+import AddDevelopers from "./AddDevelopers";
 
 const Feedback = () => {
-  const [developerSection, setDeveloperSection] = useState([]);
-  const [count, setCount] = useState(2);
+  const [developers, setDevelopers] = useState([{ name: "", email: "" }]);
 
   const handleSubmit = (values) => {
+    if (additionalValidation(developers, setDevelopers)) return;
     console.log(
       "🚀 ~ file: index.jsx ~ line 16 ~ handleSubmit ~ values",
-      values
+      { ...values, developers }
     );
     // feedback({
     //   data: values,
@@ -44,15 +43,6 @@ const Feedback = () => {
     // });
   };
 
-  const appendDeveloperSection = (e, errors, touched) => {
-    e.preventDefault();
-    setCount(count + 1);
-    setDeveloperSection([
-      ...developerSection,
-      <AddDeveloper errors={errors} touched={touched} count={count} />,
-    ]);
-  };
-
   return (
     <div className='content-container'>
       <div className='container-fluid'>
@@ -62,8 +52,6 @@ const Feedback = () => {
             <Formik
               initialValues={{
                 projectName: "",
-                developerName: "",
-                developerEmail: "",
                 clientName: "",
                 clientEmail: "",
                 teamLeadName: "",
@@ -73,6 +61,7 @@ const Feedback = () => {
                 description: "",
               }}
               validationSchema={validationSchema}
+              validate={() => additionalValidation(developers, setDevelopers)}
               onSubmit={(values) => handleSubmit(values)}>
               {({
                 values,
@@ -99,44 +88,10 @@ const Feedback = () => {
                     name='projectName'
                     asterisk={true}
                   />
-                  <InputField
-                    className='wrap-input100 border-0 bg1 rs1-wrap-input100'
-                    handleChange={handleChange("developerName")}
-                    errors={errors.developerName}
-                    touched={touched.developerName}
-                    labelName='Developer Name'
-                    placeholder='Enter Developer Name'
-                    type='text'
-                    name='developerName'
-                    asterisk={true}
-                  />
-                  <InputField
-                    className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
-                    handleChange={handleChange("developerEmail")}
-                    errors={errors.developerEmail}
-                    touched={touched.developerEmail}
-                    labelName='Developer Email'
-                    placeholder='Enter Developer Email'
-                    type='email'
-                    name='developerEmail'
-                    asterisk={false}
-                  />
 
-                  {developerSection.length !== 0 &&
-                    developerSection.map((child) => child)}
-
-                  <div className='container-add-developer-form-btn'>
-                    <button
-                      className='add-developer-form-btn'
-                      onClick={(e) =>
-                        appendDeveloperSection(e, handleChange, errors, touched)
-                      }>
-                      <span>
-                        Add More Developers&nbsp;&nbsp;
-                        <i className='fa fa-plus m-l-7' aria-hidden='true'></i>
-                      </span>
-                    </button>
-                  </div>
+                  <AddDevelopers
+                    developers={developers}
+                    setDevelopers={setDevelopers} />
 
                   <InputField
                     className='wrap-input100 border-0 bg1 rs1-wrap-input100'
