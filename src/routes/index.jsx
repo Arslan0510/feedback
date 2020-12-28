@@ -12,15 +12,15 @@ const index = ({ isAuthorized }) => {
   return (
     <>
       <ToastContainer
-        position='bottom-center'
         autoClose={5000}
+        closeOnClick
+        draggable
         hideProgressBar={false}
         newestOnTop
-        closeOnClick
-        rtl={false}
+        position='bottom-center'
         pauseOnFocusLoss
-        draggable
         pauseOnHover
+        rtl={false}
       />
       <Switch>
         {!isAuthorized ? (

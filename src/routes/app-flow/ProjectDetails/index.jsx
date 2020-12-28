@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { DetailCard } from "../../../components";
+import DetailCard from "./DetailCard";
 
 const ProjectDetails = (props) => {
   const [projectDetails, setProjectDetails] = useState();

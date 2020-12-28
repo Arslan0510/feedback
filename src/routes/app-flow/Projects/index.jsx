@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Loader, ProjectCard } from "../../../components";
+
 import { getAllProjects } from "../../../store/actions";
+import { Loader } from "../../../components";
+import ProjectCard from "./ProjectCard";
 
 import "./projects.css";
 

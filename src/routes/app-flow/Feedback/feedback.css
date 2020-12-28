@@ -767,3 +767,8 @@ textarea.input100 {
 .divider {
   border-top: 2px solid #e6e6e6;
 }
+
+.buttonLoader {
+  display: flex;
+  flex-direction: row;
+}

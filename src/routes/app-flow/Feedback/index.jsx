@@ -1,46 +1,35 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
+import { MoonLoader } from "react-spinners";
+
+import AddDevelopers from "./AddDevelopers";
 import { feedback } from "../../../store/actions";
 import InputField from "../../../components/InputField";
 import { validationSchema, additionalValidation } from "./validation.schema";
 import "./feedback.css";
-import AddDevelopers from "./AddDevelopers";
 
 const Feedback = () => {
   const [developers, setDevelopers] = useState([{ name: "", email: "" }]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (values) => {
-    if (additionalValidation(developers, setDevelopers)) return;
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 16 ~ handleSubmit ~ values",
-      { ...values, developers }
-    );
-    // feedback({
-    //   data: values,
-    //   cbSuccess: () => {
-    //     toast.success("🦄 Feedback noted!", {
-    //       position: "bottom-center",
-    //       autoClose: 3000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    //   },
-    //   cbFailure: (err) => {
-    //     toast.error(err, {
-    //       position: "bottom-center",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    //   },
-    // });
+    setLoading(true);
+    if (additionalValidation(developers, setDevelopers)) {
+      setLoading(false);
+      return;
+    }
+    feedback({
+      data: { ...values, developers },
+      cbSuccess: () => {
+        toast.success("🦄 Feedback noted!");
+        setLoading(false);
+      },
+      cbFailure: (err) => {
+        toast.error(err);
+        setLoading(false);
+      },
+    });
   };
 
   return (
@@ -58,10 +47,10 @@ const Feedback = () => {
                 teamLeadEmail: "",
                 projectManagerName: "",
                 projectManagerEmail: "",
-                description: "",
+                projectDescription: "",
               }}
               validationSchema={validationSchema}
-              validate={() => additionalValidation(developers, setDevelopers)}
+              // validate={() => additionalValidation(developers, setDevelopers)}
               onSubmit={(values) => handleSubmit(values)}>
               {({
                 values,
@@ -91,7 +80,8 @@ const Feedback = () => {
 
                   <AddDevelopers
                     developers={developers}
-                    setDevelopers={setDevelopers} />
+                    setDevelopers={setDevelopers}
+                  />
 
                   <InputField
                     className='wrap-input100 border-0 bg1 rs1-wrap-input100'
@@ -167,8 +157,8 @@ const Feedback = () => {
                     </span>
                     <textarea
                       className='input100'
-                      name='description'
-                      onChange={handleChange("description")}
+                      name='projectDescription'
+                      onChange={handleChange("projectDescription")}
                       placeholder='Your message here...'></textarea>
                     <p style={{ color: "red" }}>
                       {errors.description &&
@@ -178,12 +168,20 @@ const Feedback = () => {
                   </div>
 
                   <div className='container-contact100-form-btn'>
-                    <button className='contact100-form-btn' type='submit'>
-                      <span>
+                    <button
+                      className='contact100-form-btn'
+                      type='submit'
+                      disabled={isSubmitting}>
+                      <span className='buttonLoader'>
                         Generate Project Feedback&nbsp;&nbsp;
-                        <i
-                          className='fa fa-long-arrow-right m-l-7'
-                          aria-hidden='true'></i>
+                        {!loading ? (
+                          <i
+                            className='fa fa-long-arrow-right m-l-7'
+                            aria-hidden='true'
+                          />
+                        ) : (
+                          <MoonLoader color='#fff' size={18} loading />
+                        )}
                       </span>
                     </button>
                   </div>

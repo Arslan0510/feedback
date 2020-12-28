@@ -1,6 +1,6 @@
 import React from "react";
 
-import { colors } from "../../services/configs";
+import { colors } from "../../../../services/configs";
 import "./card.css";
 
 const ProjectCard = ({
