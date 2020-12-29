@@ -12,4 +12,5 @@ export const apis = {
   register: (data) => api(endPoints.register, data),
   feedback: (data) => api(endPoints.feedback, data),
   projects: () => api(endPoints.projects),
+  completedProjects: () => api(endPoints.completedProjects),
 };

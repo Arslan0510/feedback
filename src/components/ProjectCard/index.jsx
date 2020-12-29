@@ -1,6 +1,6 @@
 import React from "react";
 
-import { colors } from "../../../../services/configs";
+import { colors } from "../../services/configs";
 import "./card.css";
 
 const ProjectCard = ({
@@ -10,7 +10,7 @@ const ProjectCard = ({
   developerName,
   clientName,
 }) => (
-  <div className='Container'>
+  <div className='Container containerHeight'>
     {completed ? (
       <div className='Top'>
         <div className='TagContainer' style={{ backgroundColor: colors.green }}>

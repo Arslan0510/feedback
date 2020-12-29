@@ -12,6 +12,12 @@ const endPoints = {
   register: new endPoint("/user/register", "POST", false, user),
   feedback: new endPoint("/feedback", "POST", true, projects),
   projects: new endPoint("/feedback", "GET", true, projects),
+  completedProjects: new endPoint(
+    "/feedback?isCompleted=true",
+    "GET",
+    true,
+    projects
+  ),
 };
 
 export default endPoints;

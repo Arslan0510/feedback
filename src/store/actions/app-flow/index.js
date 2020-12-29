@@ -1,29 +1,38 @@
 import { apis } from "../../../services";
-import { SET_PROJECTS } from "../../constants";
+import { SET_PROJECTS, SET_COMPLETED_PROJECTS } from "../../constants";
 
 export const feedback = async ({ data, cbSuccess, cbFailure }) => {
+  console.log("🚀 ~ file: index.js ~ line 5 ~ feedback ~ data", data);
   try {
     const { data: feedbackData } = await apis.feedback(data);
-    console.log(
-      "🚀 ~ file: index.js ~ line 7 ~ feedback ~ feedbackData",
-      feedbackData
-    );
     cbSuccess();
   } catch (e) {
-    console.log("[ERROR SIGNING IN]", e);
-    cbFailure(e.toString());
+    cbFailure(e.message, e.response.data.error);
   }
 };
 
-export const getAllProjects = async ({ cbSuccess, cbFailure, dispatch }) => {
+export const getAllProjects = async ({
+  cbSuccess,
+  cbFailure,
+  dispatch,
+  isCompleted,
+}) => {
   try {
-    const { data } = await apis.projects();
-    dispatch({
-      type: SET_PROJECTS,
-      payload: data.feedbacks,
-    });
+    if (!isCompleted) {
+      const { data } = await apis.projects();
+      dispatch({
+        type: SET_PROJECTS,
+        payload: data.feedbacks,
+      });
+    } else {
+      const { data } = await apis.completedProjects();
+      dispatch({
+        type: SET_COMPLETED_PROJECTS,
+        payload: data.feedbacks,
+      });
+    }
     cbSuccess();
   } catch (e) {
-    cbFailure();
+    cbFailure(e.message);
   }
 };

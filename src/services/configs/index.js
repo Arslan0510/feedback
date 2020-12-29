@@ -12,6 +12,7 @@ export const routes = {
   register: "/register",
   dashboard: "/dashboard",
   feedback: "/feedback",
+  cFeedback: "/feedback-completed",
   projects: "/projects",
   projectDetails: "/projectDetails",
 };

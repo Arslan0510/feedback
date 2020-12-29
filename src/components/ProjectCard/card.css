@@ -73,3 +73,6 @@
 .CTA i {
   margin-left: 10px;
 }
+.containerHeight {
+  min-height: 185px;
+}

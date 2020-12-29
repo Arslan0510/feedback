@@ -9,24 +9,33 @@ import InputField from "../../../components/InputField";
 import { validationSchema, additionalValidation } from "./validation.schema";
 import "./feedback.css";
 import { removeEmptyStrings } from "../../../services";
+import SweetAlert from "react-bootstrap-sweetalert";
 
-const Feedback = () => {
+const AddFeedback = () => {
   const [developers, setDevelopers] = useState([{ name: "", email: "" }]);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const [formikValues, setFormikValues] = useState();
 
   const _submitFeedback = (values, forceInsert) => {
+    setFormikValues(values);
     feedback({
       data: removeEmptyStrings({ ...values, developers, forceInsert }),
       cbSuccess: () => {
         toast.success("🦄 Feedback noted!");
         setLoading(false);
       },
-      cbFailure: (err) => {
-        toast.error(err);
-        setLoading(false);
+      cbFailure: (err, duplicate) => {
+        if (duplicate === "LIKE_PROJECT") {
+          getThisDone();
+          setLoading(false);
+        } else {
+          toast.error(err);
+          setLoading(false);
+        }
       },
     });
-  }
+  };
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -37,10 +46,33 @@ const Feedback = () => {
     _submitFeedback(values, false);
   };
 
+  const getThisDone = () => {
+    const getAlert = () => (
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText='Yes, update it!'
+        confirmBtnBsStyle='danger'
+        title='Feedback is Already given before, want to update it?'
+        onConfirm={onConfirm}
+        onCancel={() => setAlert(null)}
+        focusCancelBtn>
+        Feedback already given before!
+      </SweetAlert>
+    );
+    setAlert(getAlert());
+  };
+
+  const onConfirm = () => {
+    _submitFeedback(formikValues, true);
+    setAlert(null);
+  };
+
   return (
     <div className='content-container'>
       <div className='container-fluid'>
         <h1>Feedback</h1>
+        {alert}
         <div className='container-contact100'>
           <div className='wrap-contact100'>
             <Formik
@@ -55,7 +87,7 @@ const Feedback = () => {
                 projectDescription: "",
               }}
               validationSchema={validationSchema}
-              // validate={() => additionalValidation(developers, setDevelopers)}
+              validate={() => additionalValidation(developers, setDevelopers)}
               onSubmit={(values) => handleSubmit(values)}>
               {({
                 values,
@@ -173,9 +205,7 @@ const Feedback = () => {
                   </div>
 
                   <div className='container-contact100-form-btn'>
-                    <button
-                      className='contact100-form-btn'
-                      type='submit'>
+                    <button className='contact100-form-btn' type='submit'>
                       <span className='buttonLoader'>
                         Generate Project Feedback&nbsp;&nbsp;
                         {!loading ? (
@@ -184,8 +214,8 @@ const Feedback = () => {
                             aria-hidden='true'
                           />
                         ) : (
-                            <MoonLoader color='#fff' size={18} loading />
-                          )}
+                          <MoonLoader color='#fff' size={18} loading />
+                        )}
                       </span>
                     </button>
                   </div>
@@ -199,4 +229,4 @@ const Feedback = () => {
   );
 };
 
-export default Feedback;
+export default AddFeedback;

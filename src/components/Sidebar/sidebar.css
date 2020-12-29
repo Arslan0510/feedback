@@ -56,7 +56,7 @@
 }
 
 .sidebar-navigation li::before {
-  background-color: #009195;
+  background-color: #fff;
   position: absolute;
   content: "";
   height: 100%;

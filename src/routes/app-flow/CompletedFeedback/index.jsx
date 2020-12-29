@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { getAllProjects } from "../../../store/actions";
 import { Loader, ProjectCard } from "../../../components";
 
-import "./projects.css";
+import "../Projects/projects.css";
 
-const Projects = (props) => {
-  const { projects } = useSelector((state) => state.reducer_projects);
+const CompletedFeedback = (props) => {
+  const { completedProjects } = useSelector((state) => state.reducer_projects);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const isCompleted = true;
 
   useEffect(() => {
-    if (projects.length === 0) {
+    if (completedProjects.length === 0) {
       getProjects();
+    } else {
+      console.log("completedProject", completedProjects);
     }
   }, []);
 
   const getProjects = () => {
     setLoading(true);
     getAllProjects({
+      isCompleted,
       dispatch,
       cbSuccess: () => {
         setLoading(false);
@@ -48,7 +51,7 @@ const Projects = (props) => {
   return (
     <div className='content-container'>
       <div className='container-fluid'>
-        <h1>Projects</h1>
+        <h1>Feedback</h1>
         <div className='row'>
           <div className='float'>
             <button
@@ -56,8 +59,8 @@ const Projects = (props) => {
               className='fa fa-retweet fa-lg my-float'
             />
           </div>
-          {projects &&
-            projects.map((project) => (
+          {completedProjects &&
+            completedProjects.map((project) => (
               <div
                 className='col-sm-4'
                 key={project.id}
@@ -77,4 +80,4 @@ const Projects = (props) => {
   );
 };
 
-export default Projects;
+export default CompletedFeedback;
