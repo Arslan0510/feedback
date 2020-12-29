@@ -8,19 +8,15 @@ import { feedback } from "../../../store/actions";
 import InputField from "../../../components/InputField";
 import { validationSchema, additionalValidation } from "./validation.schema";
 import "./feedback.css";
+import { removeEmptyStrings } from "../../../services";
 
 const Feedback = () => {
   const [developers, setDevelopers] = useState([{ name: "", email: "" }]);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (values) => {
-    setLoading(true);
-    if (additionalValidation(developers, setDevelopers)) {
-      setLoading(false);
-      return;
-    }
+  const _submitFeedback = (values, forceInsert) => {
     feedback({
-      data: { ...values, developers },
+      data: removeEmptyStrings({ ...values, developers, forceInsert }),
       cbSuccess: () => {
         toast.success("🦄 Feedback noted!");
         setLoading(false);
@@ -30,6 +26,15 @@ const Feedback = () => {
         setLoading(false);
       },
     });
+  }
+
+  const handleSubmit = (values) => {
+    setLoading(true);
+    if (additionalValidation(developers, setDevelopers)) {
+      setLoading(false);
+      return;
+    }
+    _submitFeedback(values, false);
   };
 
   return (
@@ -170,8 +175,7 @@ const Feedback = () => {
                   <div className='container-contact100-form-btn'>
                     <button
                       className='contact100-form-btn'
-                      type='submit'
-                      disabled={isSubmitting}>
+                      type='submit'>
                       <span className='buttonLoader'>
                         Generate Project Feedback&nbsp;&nbsp;
                         {!loading ? (
@@ -180,8 +184,8 @@ const Feedback = () => {
                             aria-hidden='true'
                           />
                         ) : (
-                          <MoonLoader color='#fff' size={18} loading />
-                        )}
+                            <MoonLoader color='#fff' size={18} loading />
+                          )}
                       </span>
                     </button>
                   </div>
