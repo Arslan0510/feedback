@@ -2,7 +2,6 @@ import { apis } from "../../../services";
 import { SET_PROJECTS, SET_COMPLETED_PROJECTS } from "../../constants";
 
 export const feedback = async ({ data, cbSuccess, cbFailure }) => {
-  console.log("🚀 ~ file: index.js ~ line 5 ~ feedback ~ data", data);
   try {
     const { data: feedbackData } = await apis.feedback(data);
     cbSuccess();
