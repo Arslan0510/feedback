@@ -8,8 +8,8 @@ import { Loader, ProjectCard } from "../../../components";
 
 import "./projects.css";
 
-const Projects = (props) => {
-  const { projects } = useSelector((state) => state.reducer_projects);
+const Projects = ({ history }) => {
+  const { projects } = useSelector(state => state.reducer_projects);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -33,13 +33,6 @@ const Projects = (props) => {
     });
   };
 
-  const handleClick = (id) => {
-    props.history.push(`/projectDetails/${id}`);
-  };
-
-  const pageRefresh = () => {
-    getProjects();
-  };
 
   if (loading) {
     return <Loader />;
@@ -52,7 +45,7 @@ const Projects = (props) => {
         <div className='row'>
           <div className='float'>
             <button
-              onClick={pageRefresh}
+              onClick={getProjects}
               className='fa fa-retweet fa-lg my-float'
             />
           </div>
@@ -61,7 +54,7 @@ const Projects = (props) => {
               <div
                 className='col-sm-4'
                 key={project.id}
-                onClick={() => handleClick(project.id)}>
+                onClick={() => history.push(`/projectDetails/${project.id}`)}>
                 <ProjectCard
                   title={project.projectName}
                   projectDesc={project.projectDescription}
