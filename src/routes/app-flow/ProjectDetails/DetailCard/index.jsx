@@ -1,27 +1,38 @@
 import React, { Fragment } from "react";
-import { Grid } from "@material-ui/core";
+import FloatingButton from "../../../../components/FloatingButton";
+
 import "./DetailCard.css";
 
 const DetailCard = ({ project }) => {
+  const {
+    clientName,
+    clientEmail,
+    developers,
+    isCompleted,
+    projectName,
+    projectDescription,
+    teamLeadName,
+    teamLeadEmail,
+  } = project;
+
   return (
-    <Grid className='rootContainer'>
-      <Grid item xs={12} sm={12} md={8}>
+    <div class='row h-100'>
+      <div class='col-sm-8 my-auto'>
         <div className='card'>
           <div className='cardHeader'>
-            <h4 className='cardTitleWhite'>{project.projectName}</h4>
+            <h4 className='cardTitleWhite'>
+              {projectName ? projectName : "No name available"}
+            </h4>
             <p className='cardCategoryWhite'>
-              {project.isCompleted ? "Completed" : "Await Feedback"}
+              {isCompleted ? "Completed" : "Await Feedback"}
             </p>
-          </div>
-          <div className='cardBody'>
-            <h3>{project.projectDescription}</h3>
           </div>
           <div className='cardFooter'>
             <div>
               <h6>Developer</h6>
               <div className='footerItems'>
-                {project.developers.length !== 0 &&
-                  project.developers.map((developer) => (
+                {developers.length !== 0 &&
+                  developers.map((developer) => (
                     <Fragment key={developer.email}>
                       <p>{developer.name}</p>
                       <p>{developer.email}</p>
@@ -32,21 +43,29 @@ const DetailCard = ({ project }) => {
             <div>
               <h6>Team Lead</h6>
               <div className='footerItems'>
-                <p>{project.teamLeadName}</p>
-                <p>{project.teamLeadEmail}</p>
+                <p>{teamLeadName}</p>
+                <p>{teamLeadEmail}</p>
               </div>
             </div>
             <div>
               <h6>Client</h6>
               <div className='footerItems'>
-                <p>{project.clientName}</p>
-                <p>{project.clientEmail}</p>
+                <p>{clientName}</p>
+                <p>{clientEmail}</p>
               </div>
             </div>
           </div>
+          <div className='cardBody'>
+            <h4>
+              {projectDescription
+                ? projectDescription
+                : "No description available"}
+            </h4>
+          </div>
         </div>
-      </Grid>
-    </Grid>
+        <FloatingButton icon='fa-trash' mainStyle='float-red' />
+      </div>
+    </div>
   );
 };
 

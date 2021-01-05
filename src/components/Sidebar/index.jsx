@@ -8,7 +8,11 @@ const Sidebar = () => {
     <div className='sidebar-container'>
       <div className='sidebar-logo'>Feedback</div>
       <ul className='sidebar-navigation'>
-        {/* <li className='header'>Navigation</li> */}
+        <li>
+          <Link to='/dashboard'>
+            <i className='fa fa-home' aria-hidden='true'></i> Dashboard
+          </Link>
+        </li>
         <li>
           <Link to='/projects'>
             <i className='fa fa-home' aria-hidden='true'></i> Projects
@@ -19,15 +23,10 @@ const Sidebar = () => {
             <i className='fa fa-tachometer' aria-hidden='true'></i> Add Feedback
           </Link>
         </li>
-        {/* <li className='header'>Another Menu</li> */}
         <li>
           <Link to='/feedback-completed'>
-            <i className='fa fa-users' aria-hidden='true'></i> Feedback
-          </Link>
-        </li>
-        <li>
-          <Link to='/dashboard'>
-            <i className='fa fa-cog' aria-hidden='true'></i> Settings
+            <i className='fa fa-users' aria-hidden='true'></i> Completed
+            Feedback
           </Link>
         </li>
       </ul>

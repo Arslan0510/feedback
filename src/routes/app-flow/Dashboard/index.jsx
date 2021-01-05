@@ -5,7 +5,7 @@ import { Card } from "../../../components";
 
 import "./dashboard.css";
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   return (
     <div className='content-container'>
       <div className='container-fluid'>
@@ -16,7 +16,10 @@ const Dashboard = () => {
         <Card />
         <button
           className='btn btn-sm btn-primary'
-          onClick={() => firebase.auth().signOut()}>
+          onClick={() => {
+            firebase.auth().signOut();
+            history.replace("/login");
+          }}>
           Sign Out
         </button>
       </div>

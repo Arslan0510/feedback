@@ -2,23 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
+import { CardView, Loader, Pagination } from "../../../components";
 import { getAllProjects } from "../../../store/actions";
-import { Loader, ProjectCard } from "../../../components";
+import { paginate } from "../../../utils/paginate";
 
-import "../Projects/projects.css";
-
-const CompletedFeedback = (props) => {
+const CompletedFeedback = ({ history }) => {
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const { completedProjects } = useSelector((state) => state.reducer_projects);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const isCompleted = true;
 
   useEffect(() => {
-    if (completedProjects.length === 0) {
-      getProjects();
-    } else {
-      console.log("completedProject", completedProjects);
-    }
+    if (completedProjects.length === 0) getProjects();
   }, []);
 
   const getProjects = () => {
@@ -26,9 +22,7 @@ const CompletedFeedback = (props) => {
     getAllProjects({
       isCompleted,
       dispatch,
-      cbSuccess: () => {
-        setLoading(false);
-      },
+      cbSuccess: () => setLoading(false),
       cbFailure: (err) => {
         setLoading(false);
         toast.error(err);
@@ -36,47 +30,25 @@ const CompletedFeedback = (props) => {
     });
   };
 
-  const handleClick = (id) => {
-    props.history.push(`/projectDetails/${id}`);
-  };
-
-  const pageRefresh = () => {
-    getProjects();
-  };
-
   if (loading) {
     return <Loader />;
   }
 
   return (
-    <div className='content-container'>
-      <div className='container-fluid'>
-        <h1>Feedback</h1>
-        <div className='row'>
-          <div className='float'>
-            <button
-              onClick={pageRefresh}
-              className='fa fa-retweet fa-lg my-float'
-            />
-          </div>
-          {completedProjects &&
-            completedProjects.map((project) => (
-              <div
-                className='col-sm-4'
-                key={project.id}
-                onClick={() => handleClick(project.id)}>
-                <ProjectCard
-                  title={project.projectName}
-                  projectDesc={project.projectDescription}
-                  completed={project.isCompleted}
-                  developerName={project.developerName}
-                  clientName={project.clientName}
-                />
-              </div>
-            ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <CardView
+        getProjects={getProjects}
+        history={history}
+        list={paginate(completedProjects, currentPage, 6)}
+        title='Completed Feedback'
+      />
+      <Pagination
+        itemsCount={completedProjects.length}
+        pageSize={6}
+        currentPage={currentPage}
+        onPageChange={(num) => setCurrentPage(num)}
+      />
+    </>
   );
 };
 

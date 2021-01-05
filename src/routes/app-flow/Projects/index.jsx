@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { getAllProjects } from "../../../store/actions";
-import { Loader, ProjectCard } from "../../../components";
+import { CardView, Loader, Pagination } from "../../../components";
+import { paginate } from "../../../utils/paginate";
 
 import "./projects.css";
 
 const Projects = ({ history }) => {
-  const { projects } = useSelector(state => state.reducer_projects);
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { projects } = useSelector((state) => state.reducer_projects);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (projects.length === 0) {
-      getProjects();
-    }
+    if (projects.length === 0) getProjects();
   }, []);
 
   const getProjects = () => {
     setLoading(true);
     getAllProjects({
       dispatch,
-      cbSuccess: () => {
-        setLoading(false);
-      },
+      cbSuccess: () => setLoading(false),
       cbFailure: (err) => {
         setLoading(false);
         toast.error(err);
@@ -33,40 +30,25 @@ const Projects = ({ history }) => {
     });
   };
 
-
   if (loading) {
     return <Loader />;
   }
 
   return (
-    <div className='content-container'>
-      <div className='container-fluid'>
-        <h1>Projects</h1>
-        <div className='row'>
-          <div className='float'>
-            <button
-              onClick={getProjects}
-              className='fa fa-retweet fa-lg my-float'
-            />
-          </div>
-          {projects &&
-            projects.map((project) => (
-              <div
-                className='col-sm-4'
-                key={project.id}
-                onClick={() => history.push(`/projectDetails/${project.id}`)}>
-                <ProjectCard
-                  title={project.projectName}
-                  projectDesc={project.projectDescription}
-                  completed={project.isCompleted}
-                  developerName={project.developerName}
-                  clientName={project.clientName}
-                />
-              </div>
-            ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <CardView
+        getProjects={getProjects}
+        history={history}
+        list={paginate(projects, currentPage, 6)}
+        title='Projects'
+      />
+      <Pagination
+        itemsCount={projects.length}
+        pageSize={6}
+        currentPage={currentPage}
+        onPageChange={(num) => setCurrentPage(num)}
+      />
+    </>
   );
 };
 

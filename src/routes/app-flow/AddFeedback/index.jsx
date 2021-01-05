@@ -7,9 +7,10 @@ import AddDevelopers from "./AddDevelopers";
 import { feedback } from "../../../store/actions";
 import InputField from "../../../components/InputField";
 import { validationSchema, additionalValidation } from "./validation.schema";
-import "./feedback.css";
 import { removeEmptyStrings } from "../../../services";
 import SweetAlert from "react-bootstrap-sweetalert";
+
+import "./feedback.css";
 
 const AddFeedback = () => {
   const [developers, setDevelopers] = useState([{ name: "", email: "" }]);

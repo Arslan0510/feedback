@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 import AppLogo from "../../../assets/logo.png";
+import { CredentialButton } from "../../../components";
+import CredentialField from "../../../components/CredentialField";
 import data from "../../../services/mocks/user.json";
 import { signIn } from "../../../store/actions";
+
 import "./login.css";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [userData, setUserData] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,16 +27,9 @@ const Login = () => {
     signIn({
       data: { email, password },
       cbSuccess: () => {
-        toast.success("🦄 Login Successful!", {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success("🦄 Login Successful!");
         setLoading(false);
+        history.replace("/dashboard");
       },
       cbFailure: (err) => {
         setLoading(false);
@@ -68,51 +63,35 @@ const Login = () => {
         <h1 className='h3 mb-3 font-weight-normal'>Sign In</h1>
       </div>
 
-      <div className='form-label-group'>
-        <label htmlFor='inputEmail'>Email address</label>
-        <input
-          type='email'
-          id='inputEmail'
-          name='email'
-          className='form-control'
-          placeholder='Email address'
-          value={email}
-          onChange={handleChange}
-          required
-          autoFocus
-        />
-      </div>
+      <CredentialField
+        autoFocus={true}
+        handleChange={handleChange}
+        label='Email address'
+        name='email'
+        value={email}
+        placeholder='Email address'
+        type='email'
+      />
 
-      <div className='form-label-group'>
-        <label htmlFor='inputPassword'>Password</label>
-        <input
-          type='password'
-          id='inputPassword'
-          name='password'
-          className='form-control'
-          placeholder='Password'
-          value={password}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <CredentialField
+        autoFocus={false}
+        handleChange={handleChange}
+        label='Password'
+        name='password'
+        value={password}
+        placeholder='Password'
+        type='password'
+      />
+
       <div className='checkbox mb-3'>
         <label>
           Are you new? <Link to='register'>Register here for free!</Link>
         </label>
       </div>
-      <button className='btn btn-lg btn-primary btn-block' type='submit'>
-        <div className='sign-in-button'>
-          Sign in
-          <ClipLoader
-            color='#fff'
-            size={25}
-            css={{ marginLeft: 10 }}
-            loading={loading}
-          />
-        </div>
-      </button>
+
       {error ? <p style={{ color: "red" }}>{error}</p> : null}
+
+      <CredentialButton text='Sign In' loading={loading} />
       <p className='mt-5 mb-3 text-muted text-center'>&copy; 2020</p>
     </form>
   );

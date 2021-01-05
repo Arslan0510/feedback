@@ -33,7 +33,6 @@ const index = ({ isAuthorized }) => {
           <>
             <Route path={routes.login} component={Login} />
             <Route path={routes.register} component={Register} />
-            <Redirect to={routes.login} />
           </>
         ) : (
           <>
@@ -46,7 +45,7 @@ const index = ({ isAuthorized }) => {
               component={ProjectDetails}
             />
             <Route path={routes.projects} component={Projects} />
-            <Redirect from='/' to={routes.projects} />
+            {/* <Redirect from='/' to={routes.dashboard} /> */}
           </>
         )}
       </Switch>

@@ -3,42 +3,55 @@ import React from "react";
 import { colors } from "../../services/configs";
 import "./card.css";
 
-const ProjectCard = ({
-  title,
-  projectDesc,
-  completed,
-  developerName,
-  clientName,
-}) => (
-  <div className='Container containerHeight'>
-    {completed ? (
-      <div className='Top'>
-        <div className='TagContainer' style={{ backgroundColor: colors.green }}>
-          <div>Completed</div>
+const ProjectCard = ({ project }) => {
+  const {
+    clientName,
+    developers,
+    isCompleted,
+    projectName,
+    projectDescription,
+  } = project;
+
+  return (
+    <div className='Container containerHeight'>
+      {isCompleted ? (
+        <div className='Top'>
+          <div
+            className='TagContainer'
+            style={{ backgroundColor: colors.green }}>
+            <div>Completed</div>
+          </div>
         </div>
-      </div>
-    ) : (
-      <div className='Top'>
-        <div
-          className='TagContainer'
-          style={{ backgroundColor: colors.appColor }}>
-          <div>Awaiting Feedback</div>
+      ) : (
+        <div className='Top'>
+          <div
+            className='TagContainer'
+            style={{ backgroundColor: colors.appColor }}>
+            <div>Awaiting Feedback</div>
+          </div>
         </div>
-      </div>
-    )}
-    {(title || projectDesc) && (
+      )}
       <div className='Content'>
         <div style={{ width: 310 }}>
-          {title && <h4 className='Title'>{title}</h4>}
-          {projectDesc && <p className='Subtitle'>{projectDesc}</p>}
-          {developerName && (
-            <p className='CTA'>Developer Name: {developerName}</p>
-          )}
-          {clientName && <p className='CTA'>Client Name: {clientName}</p>}
+          <h4 className='Title'>{projectName ? projectName : "No title"}</h4>
+          <p className='Subtitle'>
+            {projectDescription
+              ? projectDescription
+              : "No description available"}
+          </p>
+          <p className='CTA'>
+            Developer Name:{" "}
+            {developers.length !== 0
+              ? developers.map((dev) => dev.name)
+              : "Not available"}
+          </p>
+          <p className='CTA'>
+            Client Name: {clientName ? clientName : "Not available"}
+          </p>
         </div>
       </div>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 export default ProjectCard;

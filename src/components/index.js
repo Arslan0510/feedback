@@ -1,5 +1,10 @@
 export { default as Card } from "./Card";
+export { default as CardView } from "./CardView";
+export { default as CredentialButton } from "./CredentialButton";
+export { default as CredentialField } from "./CredentialField";
+export { default as FloatingButton } from "./FloatingButton";
 export { default as InputField } from "./InputField";
 export { default as Loader } from "./Loader";
+export { default as Pagination } from "./Pagination";
 export { default as ProjectCard } from "./ProjectCard";
 export { default as Sidebar } from "./Sidebar";
