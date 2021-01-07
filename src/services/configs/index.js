@@ -15,6 +15,7 @@ export const routes = {
   cFeedback: "/feedback-completed",
   projects: "/projects",
   projectDetails: "/projectDetails",
+  addDeveloper: "/add-developer",
 };
 
 export const colors = {

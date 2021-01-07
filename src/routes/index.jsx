@@ -1,8 +1,9 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import {
+  AddDeveloper,
   AddFeedback,
   CompletedFeedback,
   Dashboard,
@@ -45,6 +46,7 @@ const index = ({ isAuthorized }) => {
               component={ProjectDetails}
             />
             <Route path={routes.projects} component={Projects} />
+            <Route path={routes.addDeveloper} component={AddDeveloper} />
             {/* <Redirect from='/' to={routes.dashboard} /> */}
           </>
         )}

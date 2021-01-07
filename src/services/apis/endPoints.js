@@ -18,6 +18,7 @@ const endPoints = {
     true,
     projects
   ),
+  developer: new endPoint("/developers", "POST", true, projects),
 };
 
 export default endPoints;

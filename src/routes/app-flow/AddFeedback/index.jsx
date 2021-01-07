@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
-import { MoonLoader } from "react-spinners";
 
 import AddDevelopers from "./AddDevelopers";
 import { feedback } from "../../../store/actions";
-import InputField from "../../../components/InputField";
+import { InputField, FormButton } from "../../../components";
 import { validationSchema, additionalValidation } from "./validation.schema";
 import { removeEmptyStrings } from "../../../services";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -205,21 +204,10 @@ const AddFeedback = () => {
                     </p>
                   </div>
 
-                  <div className='container-contact100-form-btn'>
-                    <button className='contact100-form-btn' type='submit'>
-                      <span className='buttonLoader'>
-                        Generate Project Feedback&nbsp;&nbsp;
-                        {!loading ? (
-                          <i
-                            className='fa fa-long-arrow-right m-l-7'
-                            aria-hidden='true'
-                          />
-                        ) : (
-                          <MoonLoader color='#fff' size={18} loading />
-                        )}
-                      </span>
-                    </button>
-                  </div>
+                  <FormButton
+                    loading={loading}
+                    text='Generate Project Feedback'
+                  />
                 </form>
               )}
             </Formik>

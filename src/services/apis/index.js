@@ -13,4 +13,5 @@ export const apis = {
   feedback: (data) => api(endPoints.feedback, data),
   projects: () => api(endPoints.projects),
   completedProjects: () => api(endPoints.completedProjects),
+  developer: (data) => api(endPoints.developer, data),
 };

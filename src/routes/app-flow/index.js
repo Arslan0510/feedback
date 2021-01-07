@@ -1,3 +1,4 @@
+export { default as AddDeveloper } from "./AddDeveloper";
 export { default as AddFeedback } from "./AddFeedback";
 export { default as CompletedFeedback } from "./CompletedFeedback";
 export { default as Dashboard } from "./Dashboard";
