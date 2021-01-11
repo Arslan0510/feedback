@@ -32,7 +32,13 @@ const Sidebar = () => {
         </li>
         <li>
           <Link to='/add-developer'>
-            <i className='fa fa-users' aria-hidden='true'></i> Add Developer
+            <i className='fa fa-plus-square' aria-hidden='true'></i> Add
+            Developer
+          </Link>
+        </li>
+        <li>
+          <Link to='/developer'>
+            <i className='fa fa-users' aria-hidden='true'></i> Developers
           </Link>
         </li>
       </ul>

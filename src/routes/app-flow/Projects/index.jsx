@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { getAllProjects } from "../../../store/actions";
-import { CardView, Loader, Pagination } from "../../../components";
+import { CardView, Layout, Loader, Pagination } from "../../../components";
 import { paginate } from "../../../utils/paginate";
 
 import "./projects.css";
@@ -35,12 +35,11 @@ const Projects = ({ history }) => {
   }
 
   return (
-    <>
+    <Layout title='Projects'>
       <CardView
         getProjects={getProjects}
         history={history}
         list={paginate(projects, currentPage, 6)}
-        title='Projects'
       />
       <Pagination
         itemsCount={projects.length}
@@ -48,7 +47,7 @@ const Projects = ({ history }) => {
         currentPage={currentPage}
         onPageChange={(num) => setCurrentPage(num)}
       />
-    </>
+    </Layout>
   );
 };
 

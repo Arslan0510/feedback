@@ -1,29 +1,26 @@
 import React from "react";
 import firebase from "firebase";
 
-import { Card } from "../../../components";
+import { Card, Layout } from "../../../components";
 
 import "./dashboard.css";
 
 const Dashboard = ({ history }) => {
   return (
-    <div className='content-container'>
-      <div className='container-fluid'>
-        <h1>Dashboard</h1>
-        <div className='alert alert-danger' role='alert'>
-          This template is under maintenance!
-        </div>
-        <Card />
-        <button
-          className='btn btn-sm btn-primary'
-          onClick={() => {
-            firebase.auth().signOut();
-            history.replace("/login");
-          }}>
-          Sign Out
-        </button>
+    <Layout title='Dashboard'>
+      <div className='alert alert-danger' role='alert'>
+        This template is under maintenance!
       </div>
-    </div>
+      <Card />
+      <button
+        className='btn btn-sm btn-primary'
+        onClick={() => {
+          firebase.auth().signOut();
+          history.replace("/login");
+        }}>
+        Sign Out
+      </button>
+    </Layout>
   );
 };
 

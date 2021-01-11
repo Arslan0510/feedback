@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -7,6 +7,7 @@ import {
   AddFeedback,
   CompletedFeedback,
   Dashboard,
+  Developers,
   Projects,
   ProjectDetails,
 } from "./app-flow";
@@ -38,7 +39,8 @@ const index = ({ isAuthorized }) => {
         ) : (
           <>
             <Sidebar />
-            <Route exact path={routes.dashboard} component={Dashboard} />
+            <Redirect exact from='/' to={routes.dashboard} />
+            <Route path={routes.dashboard} component={Dashboard} />
             <Route path={routes.feedback} component={AddFeedback} />
             <Route path={routes.cFeedback} component={CompletedFeedback} />
             <Route
@@ -47,7 +49,7 @@ const index = ({ isAuthorized }) => {
             />
             <Route path={routes.projects} component={Projects} />
             <Route path={routes.addDeveloper} component={AddDeveloper} />
-            {/* <Redirect from='/' to={routes.dashboard} /> */}
+            <Route path={routes.developers} component={Developers} />
           </>
         )}
       </Switch>

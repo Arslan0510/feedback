@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { CardView, Loader, Pagination } from "../../../components";
+import { CardView, Loader, Layout, Pagination } from "../../../components";
 import { getAllProjects } from "../../../store/actions";
 import { paginate } from "../../../utils/paginate";
 
@@ -35,12 +35,11 @@ const CompletedFeedback = ({ history }) => {
   }
 
   return (
-    <>
+    <Layout title='Completed Feedback'>
       <CardView
         getProjects={getProjects}
         history={history}
         list={paginate(completedProjects, currentPage, 6)}
-        title='Completed Feedback'
       />
       <Pagination
         itemsCount={completedProjects.length}
@@ -48,7 +47,7 @@ const CompletedFeedback = ({ history }) => {
         currentPage={currentPage}
         onPageChange={(num) => setCurrentPage(num)}
       />
-    </>
+    </Layout>
   );
 };
 
