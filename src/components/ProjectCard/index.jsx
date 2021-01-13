@@ -9,6 +9,7 @@ const ProjectCard = ({ project }) => {
     clientName,
     teamLeadName,
     projectManagerName,
+    developers,
     isCompleted,
     projectName,
     projectDescription,
@@ -73,23 +74,23 @@ const ProjectCard = ({ project }) => {
           <Card.Text>
             <h5 className='font-weight-light'>Team</h5>
             <div className='row p-0 m-0'>
-              {[...Array(4)].map((_, i) => (
+              {developers.map(({ developerName }, i) => (
                 <Button
                   variant='light'
                   size='sm'
                   className='p-1 px-3 m-1 rounded-pill border'>
-                  developer {i + 1}
+                  {developerName}
                 </Button>
               ))}
             </div>
             <p className='description-text p-0 m-0'>{projectDescription}</p>
             {/* <p className="p-0 m-0">
               <strong>Team lead</strong> {teamLeadName}
-            </p>
-            <p className="p-0 m-0">
+            </p> */}
+            <p className='p-0 m-0'>
               <strong>Client</strong> {clientName}
             </p>
-            <p className="p-0 m-0">
+            {/* <p className="p-0 m-0">
               <strong>Project manager</strong> {projectManagerName}
             </p> */}
           </Card.Text>
