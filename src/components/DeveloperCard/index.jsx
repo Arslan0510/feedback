@@ -1,23 +1,27 @@
 import React from "react";
 
-const DeveloperCard = ({ about, joining, name, tag }) => {
+const DeveloperCard = ({ about, developer }) => {
+  const { developerName, designation, techStack } = developer;
   return (
-    <div class='col-md-6'>
-      <div class='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
-        <div class='col p-4 d-flex flex-column position-static'>
-          <strong class='d-inline-block mb-2 text-primary'>{tag}</strong>
-          <h3 class='mb-0'>{name}</h3>
-          <div class='mb-1 text-muted'>{joining}</div>
-          <p class='card-text mb-auto'>{about}</p>
-          <nav class='blog-pagination'>
-            <a class='btn btn-outline-primary' href='#/'>
-              Delete
-            </a>
-          </nav>
+    <div className='col-md-6' style={{ maxHeight: 274 }}>
+      <div className='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
+        <div className='col p-4 d-flex flex-column position-static'>
+          <strong className='d-inline-block mb-2 text-primary'>
+            Phaedrian
+          </strong>
+          <h4 className='mb-0'>{developerName}</h4>
+          {techStack.map((tech) => (
+            <div className='text-muted' key={tech._id}>
+              Tech: {tech.name}
+            </div>
+          ))}
+          <p className='card-text mb-auto'>
+            Designation: {designation.replace(/_/g, " ")}
+          </p>
         </div>
-        <div class='col-auto d-none d-lg-block'>
+        <div className='col-auto d-none d-lg-block'>
           <svg
-            class='bd-placeholder-img'
+            className='bd-placeholder-img'
             width='200'
             height='250'
             xmlns='http://www.w3.org/2000/svg'

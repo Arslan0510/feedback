@@ -10,15 +10,18 @@ const CardView = ({ getProjects, list, history }) => {
         icon='fa-retweet'
         mainStyle='float'
       />
-      {list &&
+      {list.length !== 0 ? (
         list.map((project) => (
           <div
             className='col-sm-4 mt-2'
-            key={project.id}
-            onClick={() => history.push(`/projectDetails/${project.id}`)}>
+            key={project._id}
+            onClick={() => history.push(`/projectDetails/${project._id}`)}>
             <ProjectCard project={project} />
           </div>
-        ))}
+        ))
+      ) : (
+        <h3>There is no projects in the database to show.</h3>
+      )}
     </div>
   );
 };

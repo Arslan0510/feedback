@@ -16,8 +16,8 @@ const DetailCard = ({ project }) => {
   } = project;
 
   return (
-    <div class='row h-100'>
-      <div class='col-sm-8 my-auto'>
+    <div className='row h-100'>
+      <div className='col-sm-8 my-auto'>
         <div className='card'>
           <div className='cardHeader'>
             <h4 className='cardTitleWhite'>

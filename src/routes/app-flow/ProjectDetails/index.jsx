@@ -11,7 +11,7 @@ const ProjectDetails = () => {
 
   return (
     <Layout title='Project Details'>
-      <DetailCard project={projects.find((el) => el.id === id)} />
+      <DetailCard project={projects.find((el) => el._id === id)} />
     </Layout>
   );
 };
