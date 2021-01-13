@@ -1,28 +1,19 @@
 import { apis } from "../../../services";
-import { teamLeadName, techStackName } from "../../../utils/newArray";
+import { teamLeadName, techStackName } from "../../../services";
 
 export const allDevelopers = async ({ cbSuccess, cbFailure }) => {
   try {
     const { data } = await apis.allDevelopers();
-    cbSuccess(data.developers);
+    const { data: teamLeads } = await apis.teamLeads();
+    cbSuccess(data.developers, teamLeads.developers);
   } catch (e) {
     cbFailure(e.message);
   }
 };
 
 export const addDeveloper = async ({ data, cbSuccess, cbFailure }) => {
-  // console.log("🚀 ~ file: developers.js ~ line 14 ~ addDeveloper ~ data", data);
   try {
     await apis.developer(data);
-    cbSuccess();
-  } catch (e) {
-    cbFailure(e.message);
-  }
-};
-
-export const getDesignation = async ({ cbSuccess, cbFailure }) => {
-  try {
-    await apis.designations();
     cbSuccess();
   } catch (e) {
     cbFailure(e.message);

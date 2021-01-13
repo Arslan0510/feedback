@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { getAllProjects } from "../../../store/actions";
 import { CardView, Layout, Loader, Pagination } from "../../../components";
-import { paginate } from "../../../utils/paginate";
+import { paginate } from "../../../services";
 
 import "./projects.css";
 

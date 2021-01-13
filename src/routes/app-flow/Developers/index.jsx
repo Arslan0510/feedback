@@ -8,13 +8,15 @@ import "./developers.css";
 
 const Developers = () => {
   const [developersArray, setDevelopersArray] = useState([]);
+  const [teamLeadArray, setTeamLeadArray] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     allDevelopers({
-      cbSuccess: (data) => {
+      cbSuccess: (data, teamLead) => {
         setDevelopersArray(data);
+        setTeamLeadArray(teamLead);
         setLoading(false);
       },
       cbFailure: (err) => {
@@ -34,7 +36,14 @@ const Developers = () => {
         <div class='row mb-2'>
           {developersArray.length !== 0 &&
             developersArray.map((dev) => (
-              <DeveloperCard key={dev._id} developer={dev} />
+              <DeveloperCard
+                key={dev._id}
+                developer={dev}
+                teamLeadArray={
+                  teamLeadArray &&
+                  teamLeadArray.filter((el) => el._id === dev.teamLead)
+                }
+              />
             ))}
         </div>
       </div>

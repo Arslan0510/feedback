@@ -20,7 +20,6 @@ const endPoints = {
   ),
   developer: new endPoint("/developers", "POST", true, projects),
   allDevelopers: new endPoint("/developers", "GET", true, projects),
-  designations: new endPoint("/designations", "GET", true, projects),
   teamLeads: new endPoint(
     "/developers?designation=TEAMLEAD",
     "GET",

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { CardView, Loader, Layout, Pagination } from "../../../components";
 import { getAllProjects } from "../../../store/actions";
-import { paginate } from "../../../utils/paginate";
+import { paginate } from "../../../services";
 
 const CompletedFeedback = ({ history }) => {
   const [loading, setLoading] = useState(false);
