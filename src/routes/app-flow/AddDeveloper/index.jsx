@@ -15,10 +15,12 @@ import {
   Layout,
 } from "../../../components";
 import { validationSchema } from "./validation.schema";
+import { techStackRename } from "../../../services";
 import "./addDeveloper.css";
 
 const AddDeveloper = () => {
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [state, setState] = useState({
     developerImage: "",
     designation: "",
@@ -30,10 +32,11 @@ const AddDeveloper = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
+    let data = { ...values, ...state };
     addDeveloper({
-      data: { values, state },
+      data: data,
       cbSuccess: () => {
-        toast.success("🦄 Feedback noted!");
+        toast.success("🦄 Developer added!");
         setLoading(false);
       },
       cbFailure: (err) => {
@@ -75,10 +78,15 @@ const AddDeveloper = () => {
   ];
 
   const handleDropdown = (options, title) => {
-    if (title === "des") setState({ ...state, designation: options.value });
-    else if (title === "teamLead")
+    if (title === "des") {
+      if (options.value === "TEAM_LEAD") setDisabled(true);
+      else setDisabled(false);
+      setState({ ...state, designation: options.value });
+    } else if (title === "teamLead")
       setState({ ...state, teamLead: options.value });
-    else if (title === "techStack") setState({ ...state, techStack: options });
+    else if (title === "techStack") {
+      setState({ ...state, techStack: techStackRename(options) });
+    }
   };
 
   const getPhoto = (e) => {
@@ -112,9 +120,6 @@ const AddDeveloper = () => {
             initialValues={{
               developerName: "",
               developerEmail: "",
-              designation: "",
-              teamLeadName: "",
-              techStack: [],
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => handleSubmit(values)}>
@@ -168,6 +173,7 @@ const AddDeveloper = () => {
 
                 <Dropdown
                   dName='teamLead'
+                  disable={disabled}
                   multiSelect={false}
                   handleChange={handleDropdown}
                   options={teamLead}

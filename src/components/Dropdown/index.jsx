@@ -3,6 +3,7 @@ import Select from "react-select";
 
 const Dropdown = ({
   dName,
+  disable,
   handleChange,
   multiSelect,
   options,
@@ -15,6 +16,7 @@ const Dropdown = ({
       <Select
         className='basic-multi-select mt-3'
         classNamePrefix='select'
+        isDisabled={disable}
         isMulti={multiSelect ? true : false}
         name='colors'
         options={options}
