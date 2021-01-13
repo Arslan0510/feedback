@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { DeveloperCard, Layout, Loader } from "../../../components";
@@ -7,23 +8,26 @@ import { allDevelopers } from "../../../store/actions";
 import "./developers.css";
 
 const Developers = () => {
-  const [developersArray, setDevelopersArray] = useState([]);
   const [teamLeadArray, setTeamLeadArray] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { developers } = useSelector((state) => state.reducer_developers);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
-    allDevelopers({
-      cbSuccess: (data, teamLead) => {
-        setDevelopersArray(data);
-        setTeamLeadArray(teamLead);
-        setLoading(false);
-      },
-      cbFailure: (err) => {
-        setLoading(false);
-        toast.error(err);
-      },
-    });
+    if (developers.length === 0)
+      allDevelopers({
+        dispatch,
+        cbSuccess: (teamLead) => {
+          setTeamLeadArray(teamLead);
+          setLoading(false);
+        },
+        cbFailure: (err) => {
+          setLoading(false);
+          toast.error(err);
+        },
+      });
+    else setLoading(false);
   }, []);
 
   if (loading) {
@@ -34,8 +38,8 @@ const Developers = () => {
     <Layout title='Developers'>
       <div class='container'>
         <div class='row mb-2'>
-          {developersArray.length !== 0 &&
-            developersArray.map((dev) => (
+          {developers.length !== 0 &&
+            developers.map((dev) => (
               <DeveloperCard
                 key={dev._id}
                 developer={dev}

@@ -129,6 +129,7 @@ const AddFeedback = () => {
                   name='clientName'
                   asterisk={true}
                 />
+
                 <InputField
                   className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
                   handleChange={handleChange("clientEmail")}
@@ -140,6 +141,7 @@ const AddFeedback = () => {
                   name='clientEmail'
                   asterisk={true}
                 />
+
                 <InputField
                   className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   handleChange={handleChange("teamLeadName")}
@@ -151,6 +153,7 @@ const AddFeedback = () => {
                   name='teamLeadName'
                   asterisk={true}
                 />
+
                 <InputField
                   className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
                   handleChange={handleChange("teamLeadEmail")}
@@ -162,6 +165,7 @@ const AddFeedback = () => {
                   name='teamLeadEmail'
                   asterisk={false}
                 />
+
                 <InputField
                   className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   handleChange={handleChange("projectManagerName")}
@@ -173,6 +177,7 @@ const AddFeedback = () => {
                   name='projectManagerName'
                   asterisk={true}
                 />
+
                 <InputField
                   className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
                   handleChange={handleChange("projectManagerEmail")}
@@ -184,6 +189,7 @@ const AddFeedback = () => {
                   name='projectManagerEmail'
                   asterisk={false}
                 />
+
                 <div
                   className='wrap-input100 validate-input bg0 rs1-alert-validate'
                   data-validate='Please Type Your Message'>

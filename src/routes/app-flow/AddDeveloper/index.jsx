@@ -139,10 +139,10 @@ const AddDeveloper = () => {
 
                 <InputField
                   asterisk={true}
-                  className='wrap-input100 border-0 validate-input bg1'
+                  className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   errors={errors.developerName}
                   handleChange={handleChange("developerName")}
-                  labelName='DEVELOPER NAME'
+                  labelName='Name'
                   name='developerName'
                   placeholder='Enter Developer Name'
                   touched={touched.developerName}
@@ -150,14 +150,16 @@ const AddDeveloper = () => {
                   value={values.developerName}
                 />
 
+                <ImageInput getPhoto={getPhoto} image={state.developerImage} />
+
                 <InputField
                   asterisk={true}
-                  className='wrap-input100 border-0 validate-input bg1'
+                  className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
                   errors={errors.developerEmail}
                   handleChange={handleChange("developerEmail")}
-                  labelName='Developer Email'
+                  labelName='Email'
                   name='developerEmail'
-                  placeholder='Enter Developer Email'
+                  placeholder='e.g. email@address.com'
                   touched={touched.developerEmail}
                   type='email'
                   value={values.developerEmail}
@@ -187,8 +189,6 @@ const AddDeveloper = () => {
                   options={techStack}
                   title='Select Tech Stack'
                 />
-
-                <ImageInput getPhoto={getPhoto} image={state.developerImage} />
 
                 <FormButton loading={loading} text='Add Developer' />
               </form>

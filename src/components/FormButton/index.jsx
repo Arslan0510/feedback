@@ -8,7 +8,7 @@ const FormButton = ({ loading, text }) => {
         <span className='buttonLoader'>
           {text}&nbsp;&nbsp;
           {!loading ? (
-            <i className='fa fa-long-arrow-right m-l-7' aria-hidden='true' />
+            <i className='fa fa-long-arrow-right mt-1' aria-hidden='true' />
           ) : (
             <MoonLoader color='#fff' size={18} loading />
           )}

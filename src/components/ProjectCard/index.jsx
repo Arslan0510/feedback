@@ -12,11 +12,10 @@ const ProjectCard = ({ project }) => {
     isCompleted,
     projectName,
     projectDescription,
-    _id
+    _id,
   } = project;
   const history = useHistory();
 
-  console.log(project);
   // return (
   //   <div className='Container containerHeight'>
   //     {isCompleted ? (
@@ -59,31 +58,31 @@ const ProjectCard = ({ project }) => {
   // );
 
   return (
-    <div className="col-4 p-3 m-0 position-relative">
-      <Card className="w-100 m-0 position-relative">
-        <Card.Header className="row m-0 justify-content-between align-items-center">
-          <h4 className="font-weight-light  p-0 m-0">
-            {projectName}
-          </h4>
-          <span className={`${isCompleted ? "badge-success" : "badge-danger"} px-2 py-1 rounded small font-weight-bold`}>
+    <div className='col-4 p-3 m-0 position-relative'>
+      <Card className='w-100 m-0 position-relative'>
+        <Card.Header className='row m-0 justify-content-between align-items-center'>
+          <h4 className='font-weight-light  p-0 m-0'>{projectName}</h4>
+          <span
+            className={`${
+              isCompleted ? "badge-success" : "badge-danger"
+            } px-2 py-1 rounded small font-weight-bold`}>
             {isCompleted ? "Completed" : "Awaiting feedback"}
           </span>
         </Card.Header>
         <Card.Body>
           <Card.Text>
-            <h5 className="font-weight-light">
-              Team
-            </h5>
-            <div className="row p-0 m-0">
+            <h5 className='font-weight-light'>Team</h5>
+            <div className='row p-0 m-0'>
               {[...Array(4)].map((_, i) => (
-                <Button variant="light" size="sm" className="p-1 px-3 m-1 rounded-pill border">
+                <Button
+                  variant='light'
+                  size='sm'
+                  className='p-1 px-3 m-1 rounded-pill border'>
                   developer {i + 1}
                 </Button>
               ))}
             </div>
-            <p className="description-text p-0 m-0">
-              {projectDescription}
-            </p>
+            <p className='description-text p-0 m-0'>{projectDescription}</p>
             {/* <p className="p-0 m-0">
               <strong>Team lead</strong> {teamLeadName}
             </p>
@@ -94,15 +93,18 @@ const ProjectCard = ({ project }) => {
               <strong>Project manager</strong> {projectManagerName}
             </p> */}
           </Card.Text>
-          <div className="text-right">
-            <Button onClick={() => history.push(`/projectDetails/${_id}`)} variant="secondary" size="sm">
+          <div className='text-right'>
+            <Button
+              onClick={() => history.push(`/projectDetails/${_id}`)}
+              variant='secondary'
+              size='sm'>
               View details
             </Button>
           </div>
         </Card.Body>
       </Card>
     </div>
-  )
+  );
 };
 
 export default ProjectCard;

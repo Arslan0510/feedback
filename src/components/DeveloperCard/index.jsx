@@ -10,8 +10,10 @@ const DeveloperCard = ({ developer, teamLeadArray }) => {
   } = developer;
 
   return (
-    <div className='col-md-6' style={{ maxHeight: 274 }}>
-      <div className='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
+    <div className='col-md-6'>
+      <div
+        className='row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'
+        style={{ maxHeight: 200 }}>
         <div className='col-md-8 p-4 d-flex flex-column position-static'>
           <strong className='d-inline-block mb-2 text-primary'>
             Phaedrian
@@ -44,9 +46,9 @@ const DeveloperCard = ({ developer, teamLeadArray }) => {
               focusable='false'
               role='img'
               aria-label='Placeholder: Thumbnail'>
-              <title>Placeholder</title>
+              <title>Profile image</title>
               <rect width='100%' height='100%' fill='#55595c' />
-              <text x='45%' y='50%' fill='#eceeef' dy='.3em'>
+              <text x='45%' y='40%' fill='#eceeef' dy='.3em'>
                 Thumbnail
               </text>
             </svg>

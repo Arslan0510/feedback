@@ -1,10 +1,15 @@
 import { apis } from "../../../services";
+import { SET_DEVELOPERS } from "../../constants";
 import { teamLeadName, techStackName } from "../../../services";
 
-export const allDevelopers = async ({ cbSuccess, cbFailure }) => {
+export const allDevelopers = async ({ cbSuccess, cbFailure, dispatch }) => {
   try {
     const { data } = await apis.allDevelopers();
     const { data: teamLeads } = await apis.teamLeads();
+    dispatch({
+      type: SET_DEVELOPERS,
+      payload: data.developers,
+    });
     cbSuccess(data.developers, teamLeads.developers);
   } catch (e) {
     cbFailure(e.message);

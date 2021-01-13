@@ -233,6 +233,14 @@ iframe {
   width: calc((100% - 30px) / 2);
 }
 
+.rs2-wrap-input100 {
+  width: calc((100% + 30px) / 2);
+}
+
+.rs3-wrap-input100 {
+  width: calc((100% + 30px) / 2);
+}
+
 .label-input100 {
   font-weight: bold;
   font-size: 10px;

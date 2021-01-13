@@ -11,7 +11,7 @@ const Dropdown = ({
   title,
 }) => {
   return (
-    <div className='wrap-input100 border-0 validate-input bg1'>
+    <div className='wrap-input100 border-0 bg1 rs1-wrap-input100'>
       <span className='label-input100 mb-1'>{title}</span>
       <Select
         className='basic-multi-select mt-3'
