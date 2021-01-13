@@ -37,21 +37,19 @@ const index = ({ isAuthorized }) => {
             <Route path={routes.register} component={Register} />
           </>
         ) : (
-          <>
-            <Sidebar />
-            <Redirect exact from='/' to={routes.dashboard} />
-            <Route path={routes.dashboard} component={Dashboard} />
-            <Route path={routes.feedback} component={AddFeedback} />
-            <Route path={routes.cFeedback} component={CompletedFeedback} />
-            <Route
-              path={`${routes.projectDetails}/:id`}
-              component={ProjectDetails}
-            />
-            <Route path={routes.projects} component={Projects} />
-            <Route path={routes.addDeveloper} component={AddDeveloper} />
-            <Route path={routes.developers} component={Developers} />
-          </>
-        )}
+            <>
+              <Sidebar />
+              <Redirect exact from='/' to={routes.dashboard} />
+              <Route path={routes.dashboard} component={Dashboard} />
+              <Route path={routes.feedback} component={AddFeedback} />
+              <Route path={routes.cFeedback} component={CompletedFeedback} />
+              <Route path={`${routes.projectDetails}/:id`} component={ProjectDetails}
+              />
+              <Route path={routes.projects} component={Projects} />
+              <Route path={routes.addDeveloper} component={AddDeveloper} />
+              <Route path={routes.developers} component={Developers} />
+            </>
+          )}
       </Switch>
     </>
   );

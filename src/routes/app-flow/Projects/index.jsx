@@ -26,7 +26,7 @@ const Projects = ({ history }) => {
       cbFailure: (err) => {
         setLoading(false);
         toast.error(err);
-      },
+      }
     });
   };
 
@@ -35,7 +35,7 @@ const Projects = ({ history }) => {
   }
 
   return (
-    <Layout title='Projects'>
+    <Layout title='Projects' onRefresh={getProjects}>
       <CardView
         getProjects={getProjects}
         history={history}

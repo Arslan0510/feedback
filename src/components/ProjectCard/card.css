@@ -69,9 +69,19 @@
   font-weight: 500;
   margin-bottom: 0;
 }
+
 .CTA i {
   margin-left: 10px;
 }
+
 .containerHeight {
   min-height: 185px;
+}
+
+.description-text {
+  display: inline-block;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }

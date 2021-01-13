@@ -9,10 +9,6 @@
   color: #fff;
 }
 
-.content-container {
-  padding-top: 20px;
-}
-
 .sidebar-logo {
   padding: 10px 15px 10px 30px;
   font-size: 20px;
@@ -44,11 +40,11 @@
   margin-right: 10px;
 }
 
-.sidebar-navigation li a:active,
-.sidebar-navigation li a:focus {
+.sidebar-navigation li a:active, .sidebar-navigation li a:focus {
   color: #00c2c7;
   background-color: #fff;
 }
+
 .sidebar-navigation li a:hover {
   text-decoration: none;
   outline: none;

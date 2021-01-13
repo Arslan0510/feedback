@@ -1,27 +1,24 @@
 import React from "react";
-import FloatingButton from "../FloatingButton";
+import { NoProjects } from "../../assets";
+// import FloatingButton from "../FloatingButton";
+import NoContent from "../NoContent";
 import ProjectCard from "../ProjectCard";
 
 const CardView = ({ getProjects, list, history }) => {
   return (
-    <div className='row'>
-      <FloatingButton
+    <div className='col-12 p-0 m-0 h-100'>
+      {/* <FloatingButton
         onPress={getProjects}
         icon='fa-retweet'
         mainStyle='float'
-      />
-      {list.length !== 0 ? (
-        list.map((project) => (
-          <div
-            className='col-sm-4 mt-2'
-            key={project._id}
-            onClick={() => history.push(`/projectDetails/${project._id}`)}>
-            <ProjectCard project={project} />
-          </div>
-        ))
-      ) : (
-        <h3>There is no projects in the database to show.</h3>
-      )}
+      /> */}
+      {list.length !== 0 ?
+        <div className="row p-0 m-0 w-100">
+          {list.map((project) => <ProjectCard project={project} />)}
+        </div>
+        :
+        <NoContent imgSrc={NoProjects} title="Your added projects will appear here" />
+      }
     </div>
   );
 };
