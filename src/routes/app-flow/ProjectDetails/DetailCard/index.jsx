@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import FloatingButton from "../../../../components/FloatingButton";
+import { FloatingButton } from "../../../../components";
 
 import "./DetailCard.css";
 

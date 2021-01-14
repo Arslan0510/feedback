@@ -1,6 +1,6 @@
 import React from "react";
 
-import img from "../../assets/setting.png";
+import { Setting } from "../../../assets";
 
 const Cards = () => {
   return (
@@ -12,7 +12,7 @@ const Cards = () => {
             <p>Revenue</p>
           </div>
           <div className='col-md-3'>
-            <img alt='' src={img} width={100} height={100} />
+            <img alt='' src={Setting} width={100} height={100} />
           </div>
         </div>
       </div>

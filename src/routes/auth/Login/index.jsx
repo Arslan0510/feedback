@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import AppLogo from "../../../assets/logo.png";
-import { CredentialButton } from "../../../components";
-import CredentialField from "../../../components/CredentialField";
+import { Logo } from "../../../assets";
+import { CredentialButton, CredentialField } from "../../../components";
 import data from "../../../services/mocks/user.json";
 import { signIn } from "../../../store/actions";
 
@@ -55,7 +54,7 @@ const Login = ({ history }) => {
       <div className='text-center mb-4'>
         <img
           className='mb-4 App-logo'
-          src={AppLogo}
+          src={Logo}
           alt=''
           width='92'
           height='92'
