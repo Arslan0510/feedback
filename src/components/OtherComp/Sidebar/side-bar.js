@@ -7,5 +7,6 @@ export const sidebar = [
     { to: routes.cFeedback, name: "Completed Feedback", icon: "fa-list-alt" },
     { to: routes.addDeveloper, name: "Add Developer", icon: "fa-plus-square" },
     { to: routes.developers, name: "Developers", icon: "fa-users" },
+    { to: routes.techStack, name: "Tech stacks", icon: "fa-linux" },
 ]
 
