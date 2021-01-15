@@ -1,32 +1,30 @@
 import React from "react";
-import { Badge, Card } from "react-bootstrap";
+import {Badge, Card} from "react-bootstrap";
 
-import Photo from "./photo.jpg";
+import Photo from "./Photo.png";
 import "./DCard.css";
 
-const DCard = () => {
+const DCard = ({developer}) => {
+  const {developerImage, developerName, designation, techStack} = developer;
   return (
     <Card className='card-container'>
-      <Badge className='pro' variant='primary'>
-        Pro
-      </Badge>
-      <Card.Img src={Photo} />
+      {/* <Badge className='pro' variant='primary'>
+        Phaedrian
+      </Badge> */}
+      <Card.Img src={developerImage ? developerImage : Photo} />
       <Card.Body>
-        <Card.Title>Musrafa Ahmed</Card.Title>
-        <Card.Text>Front-end Developer</Card.Text>
+        <Card.Title>{developerName ? developerName : "Undefined"}</Card.Title>
         <Card.Text>
-          User interface designer and <br /> front-end developer
+          {designation ? designation.replace(/_/g, " ") : "Undefined"}
         </Card.Text>
         <div class='skills'>
           <h6>Skills</h6>
           <ul>
-            <li>UI / UX</li>
-            <li>Front End Development</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node</li>
+            {techStack.length !== 0 ? (
+              techStack.map((tech) => <li>{tech.name}</li>)
+            ) : (
+              <li>No Skill</li>
+            )}
           </ul>
         </div>
       </Card.Body>

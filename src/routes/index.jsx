@@ -10,6 +10,7 @@ import {
   Developers,
   Projects,
   ProjectDetails,
+  TechStack,
 } from "./app-flow";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -52,6 +53,7 @@ const index = ({ isAuthorized }) => {
                 <Route exact path={routes.projects} component={Projects} />
                 <Route exact path={routes.addDeveloper} component={AddDeveloper} />
                 <Route exact path={routes.developers} component={Developers} />
+                <Route exact path={routes.techStack} component={TechStack} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </>

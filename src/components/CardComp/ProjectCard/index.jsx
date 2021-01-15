@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import ScrollContainer from 'react-indiana-drag-scroll'
+import ScrollContainer from "react-indiana-drag-scroll";
 
 import "./card.css";
 
@@ -22,8 +22,9 @@ const ProjectCard = ({ project }) => {
         <Card.Header className='row m-0 p-2 justify-content-between align-items-center'>
           <h5 className='font-weight-light  p-0 m-0'>{projectName}</h5>
           <span
-            className={`${isCompleted ? "badge-success" : "badge-danger"
-              } px-2 py-1 rounded small font-weight-bold`}>
+            className={`${
+              isCompleted ? "badge-success" : "badge-danger"
+            } px-2 py-1 rounded small font-weight-bold`}>
             {isCompleted ? "Completed" : "Awaiting feedback"}
           </span>
         </Card.Header>
@@ -37,7 +38,7 @@ const ProjectCard = ({ project }) => {
                   variant='light'
                   size='sm'
                   className='p-1 px-3 m-1 rounded-pill border'>
-                  <small className="p-0 m-0">{developerName}</small>
+                  <small className='p-0 m-0'>{developerName}</small>
                 </Button>
               ))}
             </div>
@@ -50,14 +51,14 @@ const ProjectCard = ({ project }) => {
             <Button
               onClick={() => history.push(`/projectDetails/${_id}`)}
               variant='light'
-              className="border"
+              className='border'
               size='sm'>
               View details
             </Button>
           </div>
         </Card.Body>
       </Card>
-    </div >
+    </div>
   );
 };
 

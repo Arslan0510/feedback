@@ -17,6 +17,7 @@ export const routes = {
   projectDetails: "/projectDetails/:id",
   developers: "/developer",
   addDeveloper: "/developer/add",
+  techStack: "/techstack",
 };
 
 export const colors = {

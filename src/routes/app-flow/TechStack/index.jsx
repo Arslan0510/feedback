@@ -2,20 +2,18 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-import {DCard, DeveloperCard, Layout, Loader} from "../../../components";
-import {allDevelopers} from "../../../store/actions";
+import {Layout, Loader, TechStackCard} from "../../../components";
+import {getTechStack} from "../../../store/actions/app-flow/developers";
 
-import "./developers.css";
-
-const Developers = () => {
+const TechStack = () => {
   const [loading, setLoading] = useState(false);
-  const {developers} = useSelector((state) => state.reducer_developers);
+  const {techStack} = useSelector((state) => state.reducer_developers);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
-    if (developers.length === 0)
-      allDevelopers({
+    if (techStack.length === 0)
+      getTechStack({
         dispatch,
         cbSuccess: () => {
           setLoading(false);
@@ -25,7 +23,6 @@ const Developers = () => {
           toast.error(err);
         },
       });
-    else setLoading(false);
   }, []);
 
   if (loading) {
@@ -33,15 +30,17 @@ const Developers = () => {
   }
 
   return (
-    <Layout title='Developers'>
+    <Layout title='Tech Stack' onRefresh={false}>
       <div className='container'>
         <div className='row mb-2'>
-          {developers.length !== 0 &&
-            developers.map((dev) => <DCard key={dev._id} developer={dev} />)}
+          {techStack.length !== 0 &&
+            techStack.map((tech, i) => (
+              <TechStackCard tech={tech} key={tech._id} index={i} />
+            ))}
         </div>
       </div>
     </Layout>
   );
 };
 
-export default Developers;
+export default TechStack;
