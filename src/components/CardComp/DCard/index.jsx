@@ -8,22 +8,26 @@ const DCard = ({developer}) => {
   const {developerImage, developerName, designation, techStack} = developer;
   return (
     <Card className='card-container'>
-      {/* <Badge className='pro' variant='primary'>
-        Phaedrian
-      </Badge> */}
+      <Badge className='best-stories' variant='primary'>
+        {designation ? designation.replace(/_/g, " ") : "Undefined"}
+      </Badge>
       <Card.Img src={developerImage ? developerImage : Photo} />
       <Card.Body>
         <Card.Title>{developerName ? developerName : "Undefined"}</Card.Title>
-        <Card.Text>
-          {designation ? designation.replace(/_/g, " ") : "Undefined"}
-        </Card.Text>
+
         <div class='skills'>
           <h6>Skills</h6>
           <ul>
             {techStack.length !== 0 ? (
-              techStack.map((tech) => <li>{tech.name}</li>)
+              techStack.map((tech) => (
+                <Badge className='badgeStyle' variant='secondary'>
+                  {tech.name}
+                </Badge>
+              ))
             ) : (
-              <li>No Skill</li>
+              <Badge className='badgeStyle' variant='secondary'>
+                No Skill
+              </Badge>
             )}
           </ul>
         </div>

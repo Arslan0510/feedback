@@ -21,7 +21,7 @@ p {
   padding: 30px 0 0;
   position: relative;
   width: 350px !important;
-  height: 400px;
+  height: 320px;
   max-width: 100%;
   text-align: center;
   margin: 20px 0;
@@ -48,8 +48,8 @@ p {
   border-radius: 50%;
   object-fit: cover;
   padding: 7px;
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
 }
 
 button.primary {
@@ -91,4 +91,22 @@ button.primary.ghost {
   margin: 0 7px 7px 0;
   padding: 7px;
   color: #1f1a36;
+}
+
+.best-stories {
+  font-weight: 400 !important;
+  height: 35px;
+  line-height: 30px !important;
+  position: absolute;
+  right: -2px;
+  top: 8px;
+  width: auto;
+  z-index: 300;
+  text-transform: capitalize !important;
+}
+
+.badgeStyle {
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  margin-right: 4px;
 }
