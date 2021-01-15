@@ -17,4 +17,5 @@ export const apis = {
   developer: (data) => api(endPoints.developer, data),
   teamLeads: () => api(endPoints.teamLeads),
   techStack: () => api(endPoints.techStack),
+  dashboard: () => api(endPoints.dashboard),
 };

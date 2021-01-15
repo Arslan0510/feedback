@@ -7,7 +7,7 @@ const CardView = ({ list }) => {
   return (
     <div className='col-12 p-0 m-0'>
       {list.length !== 0 ? (
-        <div className='row p-0 m-0 w-100'>
+        <div className='row p-0 m-0 w-100 align-items-center'>
           {list.map((project) => (
             <ProjectCard key={project._id} project={project} />
           ))}
