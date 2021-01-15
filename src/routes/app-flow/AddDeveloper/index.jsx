@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
-
-import {
-  addDeveloper,
-  getTeamLead,
-  getTechStack,
-} from "../../../store/actions";
-import {
-  Dropdown,
-  FormButton,
-  ImageInput,
-  InputField,
-  Layout,
-} from "../../../components";
+import { addDeveloper, getTeamLead, getTechStack } from "../../../store/actions";
+import { Dropdown, FormButton, ImageInput, InputField, Layout } from "../../../components";
 import { validationSchema } from "./validation.schema";
-import { techStackRename } from "../../../services";
 import "./addDeveloper.css";
+import { getPhoto, options } from "./helper-methods";
 
 const AddDeveloper = () => {
   const [loading, setLoading] = useState(false);
@@ -70,18 +59,7 @@ const AddDeveloper = () => {
     });
   }, []);
 
-  const options = [
-    { value: "JUNIOR_DEVELOPER", label: "JUNIOR DEVELOPER" },
-    { value: "MID_LEVEL_DEVELOPER", label: "MID LEVEL DEVELOPER" },
-    { value: "SENIOR_DEVELOPER", label: "SENIOR DEVELOPER" },
-    { value: "TEAM_LEAD", label: "TEAM LEAD" },
-  ];
-
   const handleDropdown = (options, title) => {
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 81 ~ handleDropdown ~ options",
-      options
-    );
     if (title === "des") {
       if (options.value === "TEAM_LEAD") setDisabled(true);
       else setDisabled(false);
@@ -90,30 +68,6 @@ const AddDeveloper = () => {
       setState({ ...state, teamLead: options.value });
     else if (title === "techStack") {
       setState({ ...state, techStack: options.map((option) => option.id) });
-    }
-  };
-
-  const getPhoto = (e) => {
-    e.preventDefault();
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    console.log("🚀 ~ file: index.jsx ~ line 96 ~ getPhoto ~ file", file);
-    var regex = new RegExp(
-      "([a-zA-Z0-9s_\\.-:])+(.jpg|.JPG|.png|.PNG|.gif|.jpeg|.svg)$"
-    );
-    if (regex.test(file.name)) {
-      reader.onloadend = () => {
-        var image = new Image();
-        image.src = reader.result;
-        image.onload = () => {
-          // if (image.width <= 400 && image.height <= 120) {
-          setState({ ...state, developerImage: file });
-          // }
-        };
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Wrong file extension...");
     }
   };
 
@@ -133,9 +87,7 @@ const AddDeveloper = () => {
               errors,
               touched,
               handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
+              handleSubmit
             }) => (
               <form
                 className='contact100-form validate-form'
@@ -155,7 +107,7 @@ const AddDeveloper = () => {
                   value={values.developerName}
                 />
 
-                <ImageInput getPhoto={getPhoto} image={state.developerImage} />
+                <ImageInput getPhoto={getPhoto({ state, setState })} image={state.developerImage} />
 
                 <InputField
                   asterisk={true}
