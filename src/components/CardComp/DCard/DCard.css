@@ -21,13 +21,14 @@ p {
   padding: 30px 0 0;
   position: relative;
   width: 350px !important;
+  height: 400px;
   max-width: 100%;
   text-align: center;
   margin: 20px 0;
   overflow: hidden;
   display: grid;
   place-items: center;
-  margin: 5px;
+  margin: 5px !important;
 }
 
 .card-container .pro {
@@ -45,6 +46,7 @@ p {
 .card-container img {
   border: 1px solid #c400d7;
   border-radius: 50%;
+  object-fit: cover;
   padding: 7px;
   height: 150px;
   width: 150px;
@@ -66,12 +68,13 @@ button.primary.ghost {
 }
 
 .skills {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
   background-color: #fff;
   text-align: left;
   padding: 15px;
   margin-top: 30px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  width: 300px;
 }
 
 .skills ul {

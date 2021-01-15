@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import ScrollContainer from 'react-indiana-drag-scroll'
+import ScrollContainer from "react-indiana-drag-scroll";
 
 import "./card.css";
 
@@ -16,60 +16,19 @@ const ProjectCard = ({ project }) => {
   } = project;
   const history = useHistory();
 
-  // return (
-  //   <div className='Container containerHeight'>
-  //     {isCompleted ? (
-  //       <div className='Top'>
-  //         <div
-  //           className='TagContainer'
-  //           style={{ backgroundColor: colors.green }}>
-  //           <div>Completed</div>
-  //         </div>
-  //       </div>
-  //     ) : (
-  //       <div className='Top'>
-  //         <div
-  //           className='TagContainer'
-  //           style={{ backgroundColor: colors.appColor }}>
-  //           <div>Awaiting Feedback</div>
-  //         </div>
-  //       </div>
-  //     )}
-  //     <div className='Content'>
-  //       <div style={{ width: 310 }}>
-  //         <h4 className='Title'>{projectName ? projectName : "No title"}</h4>
-  //         <p className='Subtitle'>
-  //           {projectDescription
-  //             ? projectDescription
-  //             : "No description available"}
-  //         </p>
-  //         <p className='CTA'>
-  //           Developer Name:{" "}
-  //           {developers.length !== 0
-  //             ? developers.map((dev) => dev.name)
-  //             : "Not available"}
-  //         </p>
-  //         <p className='CTA'>
-  //           Client Name: {clientName ? clientName : "Not available"}
-  //         </p>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-
   return (
     <div className='col-4 p-3 m-0 position-relative'>
       <Card className='w-100 m-0 position-relative'>
         <Card.Header className='row m-0 p-2 justify-content-between align-items-center'>
           <h5 className='font-weight-light  p-0 m-0'>{projectName}</h5>
           <span
-            className={`${isCompleted ? "badge-success" : "badge-danger"
-              } px-2 py-1 rounded small font-weight-bold`}>
+            className={`${
+              isCompleted ? "badge-success" : "badge-danger"
+            } px-2 py-1 rounded small font-weight-bold`}>
             {isCompleted ? "Completed" : "Awaiting feedback"}
           </span>
         </Card.Header>
-        <Card.Body className="p-3">
-          {/* <Card.Text> */}
+        <Card.Body className='p-3'>
           <h6 className='font-weight-light text-capitalize'>Team</h6>
           <ScrollContainer style={{ cursor: "grab" }}>
             <div className='row p-0 m-0 width-max-content'>
@@ -79,7 +38,7 @@ const ProjectCard = ({ project }) => {
                   variant='light'
                   size='sm'
                   className='p-1 px-3 m-1 rounded-pill border'>
-                  <small className="p-0 m-0">{developerName}</small>
+                  <small className='p-0 m-0'>{developerName}</small>
                 </Button>
               ))}
             </div>
@@ -92,14 +51,14 @@ const ProjectCard = ({ project }) => {
             <Button
               onClick={() => history.push(`/projectDetails/${_id}`)}
               variant='light'
-              className="border"
+              className='border'
               size='sm'>
               View details
             </Button>
           </div>
         </Card.Body>
       </Card>
-    </div >
+    </div>
   );
 };
 

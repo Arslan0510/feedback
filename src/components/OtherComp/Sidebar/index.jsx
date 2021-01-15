@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import "./sidebar.css";
 
@@ -39,6 +39,11 @@ const Sidebar = () => {
         <li>
           <Link to='/developer'>
             <i className='fa fa-users' aria-hidden='true'></i> Developers
+          </Link>
+        </li>
+        <li>
+          <Link to='/tech-stack'>
+            <i className='fa fa-users' aria-hidden='true'></i> Tech stack
           </Link>
         </li>
       </ul>
