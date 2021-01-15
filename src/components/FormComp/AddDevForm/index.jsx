@@ -11,7 +11,6 @@ const AddDevForm = ({
   handleChange,
   handleDropdown,
   handleSubmit,
-  loading,
   title,
   state,
   setImageUri,
@@ -82,7 +81,7 @@ const AddDevForm = ({
         title='Select Tech Stack'
       />
 
-      <FormButton loading={loading} text='Add Developer' />
+      <FormButton text='Add Developer' />
     </form>
   );
 };

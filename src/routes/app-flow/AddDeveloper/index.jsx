@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Formik} from "formik";
 import {toast} from "react-toastify";
 import {addDeveloper, getTeamLead, getTechStack} from "../../../store/actions";
-import {AddDevForm, Layout} from "../../../components";
+import {AddDevForm, Layout, Loader} from "../../../components";
 import {validationSchema} from "./validation.schema";
 import "./addDeveloper.css";
 
@@ -71,6 +71,8 @@ const AddDeveloper = () => {
     }
   };
 
+  if (loading) return <Loader />;
+
   return (
     <Layout title='Add New Developer'>
       <div className='container-contact100'>
@@ -89,7 +91,6 @@ const AddDeveloper = () => {
                 handleChange={handleChange}
                 handleDropdown={handleDropdown}
                 handleSubmit={handleSubmit}
-                loading={loading}
                 title='Add New Developer'
                 state={state}
                 setImageUri={setImageUri}
