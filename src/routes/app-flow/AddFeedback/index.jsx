@@ -1,26 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
 
 import AddDevelopers from "./AddDevelopers";
-import { feedback } from "../../../store/actions";
-import { InputField, FormButton, Layout } from "../../../components";
+import { feedback, allDevelopers, getTeamLead } from "../../../store/actions";
+import { Dropdown, InputField, FormButton, Layout } from "../../../components";
 import { validationSchema, additionalValidation } from "./validation.schema";
-import { removeEmptyStrings } from "../../../services";
+import {
+  developerNames,
+  teamLeadName,
+  techStackArray,
+  removeEmptyStrings,
+} from "../../../services";
 import SweetAlert from "react-bootstrap-sweetalert";
 
 import "./feedback.css";
 
 const AddFeedback = () => {
-  const [developers, setDevelopers] = useState([{ name: "", email: "" }]);
+  const [state, setState] = useState({ developers: [], teamLeads: [] });
+  const [developers, setDevelopers] = useState([]);
+  const [teamLead, setTeamLead] = useState("");
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const [formikValues, setFormikValues] = useState();
 
-  const _submitFeedback = (values, forceInsert) => {
-    setFormikValues(values);
+  useEffect(() => {
+    setLoading(true);
+    allDevelopers({
+      cbSuccess: (developers, teamLeads) => {
+        setState({
+          ...state,
+          developers: developerNames(developers),
+          teamLeads: teamLeadName(teamLeads),
+        });
+
+        setLoading(false);
+      },
+      cbFailure: (err) => {
+        toast.error(err);
+        setLoading(false);
+      },
+    });
+  }, []);
+
+  const _submitFeedback = (values) => {
+    // setFormikValues(values);
     feedback({
-      data: removeEmptyStrings({ ...values, developers, forceInsert }),
+      data: removeEmptyStrings({ ...values, developers }),
       cbSuccess: () => {
         toast.success("🦄 Feedback noted!");
         setLoading(false);
@@ -39,11 +65,22 @@ const AddFeedback = () => {
 
   const handleSubmit = (values) => {
     setLoading(true);
-    if (additionalValidation(developers, setDevelopers)) {
-      setLoading(false);
-      return;
-    }
-    _submitFeedback(values, false);
+    feedback({
+      data: removeEmptyStrings({ ...values, developers, teamLead }),
+      cbSuccess: () => {
+        toast.success("🦄 Feedback noted!");
+        setLoading(false);
+      },
+      cbFailure: (err, duplicate) => {
+        if (duplicate === "LIKE_PROJECT") {
+          getThisDone();
+          setLoading(false);
+        } else {
+          toast.error(err);
+          setLoading(false);
+        }
+      },
+    });
   };
 
   const getThisDone = () => {
@@ -68,6 +105,12 @@ const AddFeedback = () => {
     setAlert(null);
   };
 
+  const handleDropdown = (options, title) => {
+    if (title === "dev") {
+      setDevelopers(options);
+    } else if (title === "teamLead") setTeamLead(options.value);
+  };
+
   return (
     <Layout title='Feedback'>
       {alert}
@@ -78,14 +121,12 @@ const AddFeedback = () => {
               projectName: "",
               clientName: "",
               clientEmail: "",
-              teamLeadName: "",
-              teamLeadEmail: "",
               projectManagerName: "",
               projectManagerEmail: "",
               projectDescription: "",
             }}
             validationSchema={validationSchema}
-            validate={() => additionalValidation(developers, setDevelopers)}
+            // validate={() => additionalValidation(developers, setDevelopers)}
             onSubmit={(values) => handleSubmit(values)}>
             {({
               values,
@@ -113,9 +154,24 @@ const AddFeedback = () => {
                   asterisk={true}
                 />
 
-                <AddDevelopers
+                {/* <AddDevelopers
                   developers={developers}
                   setDevelopers={setDevelopers}
+                /> */}
+
+                <Dropdown
+                  dName='dev'
+                  handleChange={handleDropdown}
+                  multiSelect={true}
+                  options={state.developers}
+                  title='Select Developer'
+                />
+                <Dropdown
+                  dName='teamLead'
+                  handleChange={handleDropdown}
+                  multiSelect={false}
+                  options={state.teamLeads}
+                  title='Select Team Lead'
                 />
 
                 <InputField
@@ -142,7 +198,7 @@ const AddFeedback = () => {
                   asterisk={true}
                 />
 
-                <InputField
+                {/* <InputField
                   className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   handleChange={handleChange("teamLeadName")}
                   errors={errors.teamLeadName}
@@ -164,13 +220,13 @@ const AddFeedback = () => {
                   type='email'
                   name='teamLeadEmail'
                   asterisk={false}
-                />
+                /> */}
 
                 <InputField
                   className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   handleChange={handleChange("projectManagerName")}
-                  errors={errors.teamLeadName}
-                  touched={touched.teamLeadName}
+                  errors={errors.projectManagerName}
+                  touched={touched.projectManagerName}
                   labelName='Project Manager Name'
                   placeholder='Enter Project Manager Name'
                   type='text'
@@ -181,8 +237,8 @@ const AddFeedback = () => {
                 <InputField
                   className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
                   handleChange={handleChange("projectManagerEmail")}
-                  errors={errors.teamLeadEmail}
-                  touched={touched.teamLeadEmail}
+                  errors={errors.projectManagerEmail}
+                  touched={touched.projectManagerEmail}
                   labelName='Project Manager Email'
                   placeholder='Enter Project Manager Email'
                   type='email'

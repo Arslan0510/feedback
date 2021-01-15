@@ -22,7 +22,7 @@ const AddDeveloper = () => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [state, setState] = useState({
-    developerImage: "",
+    developerImage: undefined,
     designation: "",
     teamLead: "",
     techStack: [],
@@ -78,6 +78,10 @@ const AddDeveloper = () => {
   ];
 
   const handleDropdown = (options, title) => {
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 81 ~ handleDropdown ~ options",
+      options
+    );
     if (title === "des") {
       if (options.value === "TEAM_LEAD") setDisabled(true);
       else setDisabled(false);
@@ -85,7 +89,7 @@ const AddDeveloper = () => {
     } else if (title === "teamLead")
       setState({ ...state, teamLead: options.value });
     else if (title === "techStack") {
-      setState({ ...state, techStack: techStackRename(options) });
+      setState({ ...state, techStack: options.map((option) => option.id) });
     }
   };
 
@@ -93,6 +97,7 @@ const AddDeveloper = () => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
+    console.log("🚀 ~ file: index.jsx ~ line 96 ~ getPhoto ~ file", file);
     var regex = new RegExp(
       "([a-zA-Z0-9s_\\.-:])+(.jpg|.JPG|.png|.PNG|.gif|.jpeg|.svg)$"
     );
@@ -102,7 +107,7 @@ const AddDeveloper = () => {
         image.src = reader.result;
         image.onload = () => {
           // if (image.width <= 400 && image.height <= 120) {
-          setState({ ...state, developerImage: reader.result });
+          setState({ ...state, developerImage: file });
           // }
         };
       };

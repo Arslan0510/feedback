@@ -5,6 +5,7 @@ h3 {
 h6 {
   margin: 5px 0;
   text-transform: uppercase;
+  color: #1f1a36;
 }
 
 p {
@@ -15,17 +16,18 @@ p {
 .card-container {
   background-color: #fff;
   border-radius: 25px;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
   color: #b3b8cd;
   padding: 30px 0 0;
   position: relative;
-  width: 350px;
+  width: 350px !important;
   max-width: 100%;
   text-align: center;
   margin: 20px 0;
   overflow: hidden;
   display: grid;
   place-items: center;
+  margin: 5px;
 }
 
 .card-container .pro {
@@ -64,10 +66,12 @@ button.primary.ghost {
 }
 
 .skills {
-  background-color: #1f1a36;
+  background-color: #fff;
   text-align: left;
   padding: 15px;
   margin-top: 30px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .skills ul {
@@ -83,4 +87,5 @@ button.primary.ghost {
   font-size: 12px;
   margin: 0 7px 7px 0;
   padding: 7px;
+  color: #1f1a36;
 }

@@ -13,12 +13,7 @@ export const validationSchema = Yup.object().shape({
     .required("Required")
     .label("Client Name"),
   clientEmail: Yup.string().required("Required").email().label("Email"),
-  teamLeadName: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .label("Team Lead Name"),
-  teamLeadEmail: Yup.string().email().label("Email"),
+  projectManagerName: Yup.string().required("Required"),
   projectManagerEmail: Yup.string().email().label("Email"),
   description: Yup.string(),
 });

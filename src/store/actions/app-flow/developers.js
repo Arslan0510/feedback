@@ -1,15 +1,18 @@
+import axios from "axios";
+import fs from "fs";
 import { apis } from "../../../services";
 import { SET_DEVELOPERS } from "../../constants";
-import { teamLeadName, techStackName } from "../../../services";
+import { developerNames, teamLeadName, techStackName } from "../../../services";
 
 export const allDevelopers = async ({ cbSuccess, cbFailure, dispatch }) => {
   try {
     const { data } = await apis.allDevelopers();
     const { data: teamLeads } = await apis.teamLeads();
-    dispatch({
-      type: SET_DEVELOPERS,
-      payload: data.developers,
-    });
+    if (dispatch)
+      dispatch({
+        type: SET_DEVELOPERS,
+        payload: data.developers,
+      });
     cbSuccess(data.developers, teamLeads.developers);
   } catch (e) {
     cbFailure(e.message);
@@ -17,9 +20,34 @@ export const allDevelopers = async ({ cbSuccess, cbFailure, dispatch }) => {
 };
 
 export const addDeveloper = async ({ data, cbSuccess, cbFailure }) => {
+  var result = new FormData();
+  result.append("developerName", data.developerNames);
+  result.append("developerEmail", data.developerEmail);
+  data.techStack.forEach((el) => result.append("techStack[]", el));
+  result.append("designation", data.designation);
+  result.append("teamLead", data.teamLead);
+  if (data.developerImage) result.append("developerImage", data.developerImage);
+
+  var config = {
+    method: "post",
+    url: "http://localhost:3000/developers",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("authorizationToken"),
+      "content-Type": "multipart/form-data",
+    },
+    data: result,
+  };
+
   try {
-    await apis.developer(data);
-    cbSuccess();
+    await axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.result));
+        cbSuccess();
+      })
+      .catch(function (error) {
+        console.log(error);
+        cbFailure(error);
+      });
   } catch (e) {
     cbFailure(e.message);
   }
@@ -38,6 +66,15 @@ export const getTechStack = async ({ cbSuccess, cbFailure }) => {
   try {
     const { data } = await apis.techStack();
     cbSuccess(techStackName(data.data));
+  } catch (e) {
+    cbFailure(e.message);
+  }
+};
+
+export const getAllDevelopers = async ({ cbSuccess, cbFailure }) => {
+  try {
+    const { data } = await apis.allDevelopers();
+    cbSuccess(developerNames(data.developers));
   } catch (e) {
     cbFailure(e.message);
   }
