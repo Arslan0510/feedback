@@ -1,7 +1,7 @@
 import React from "react";
-import {Route, Switch, Redirect} from "react-router-dom";
-import {ToastContainer} from "react-toastify";
-
+import { Route, BrowserRouter, Switch, Redirect, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { history } from "../helpers";
 import {
   AddDeveloper,
   AddFeedback,
@@ -14,14 +14,15 @@ import {
 } from "./app-flow";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import {routes} from "../services";
-import {Sidebar} from "../components";
+import { routes } from "../services";
+import { Sidebar } from "../components";
+import { Button } from "react-bootstrap";
 
-const index = ({isAuthorized}) => {
+const index = ({ isAuthorized }) => {
   return (
     <>
       <ToastContainer
-        autoClose={5000}
+        autoClose={3000}
         closeOnClick
         draggable
         hideProgressBar={false}
@@ -31,32 +32,53 @@ const index = ({isAuthorized}) => {
         pauseOnHover
         rtl={false}
       />
-      <Switch>
+      <BrowserRouter>
         {!isAuthorized ? (
-          <>
-            <Route path={routes.login} component={Login} />
-            <Route path={routes.register} component={Register} />
-          </>
-        ) : (
-          <>
-            <Sidebar />
-            <Redirect exact from='/' to={routes.dashboard} />
-            <Route path={routes.dashboard} component={Dashboard} />
-            <Route path={routes.feedback} component={AddFeedback} />
-            <Route path={routes.cFeedback} component={CompletedFeedback} />
-            <Route
-              path={`${routes.projectDetails}/:id`}
-              component={ProjectDetails}
-            />
-            <Route path={routes.projects} component={Projects} />
-            <Route path={routes.addDeveloper} component={AddDeveloper} />
-            <Route path={routes.developers} component={Developers} />
-            <Route path={routes.techStack} component={TechStack} />
-          </>
-        )}
-      </Switch>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path={routes.login} component={Login} />
+            <Route exact path={routes.register} component={Register} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        )
+          :
+          (
+            <>
+              <Sidebar />
+              <Switch>
+                <Route exact path={routes.dashboard} component={Dashboard} />
+                <Route exact path={routes.feedback} component={AddFeedback} />
+                <Route exact path={routes.cFeedback} component={CompletedFeedback} />
+                <Route exact path={routes.projectDetails} component={ProjectDetails} />
+                <Route exact path={routes.projects} component={Projects} />
+                <Route exact path={routes.addDeveloper} component={AddDeveloper} />
+                <Route exact path={routes.developers} component={Developers} />
+                <Route exact path={routes.techStack} component={TechStack} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </>
+          )
+        }
+      </BrowserRouter>
     </>
   );
 };
 
 export default index;
+
+export const NotFound = () => (
+  <div className="w-100 h-100 d-flex flex-column p-0 m-0 justify-content-center align-items-center">
+    <h1 className="text-secondary">
+      404!
+    </h1>
+    <br />
+    <p>
+      The page you are looking for is not found
+    </p>
+    <Link to={routes.login} style={{ textDecoration: "none" }}>
+      <div className="btn-light px-4 py-2 rounded">
+        Go to login
+    </div>
+    </Link>
+  </div>
+)

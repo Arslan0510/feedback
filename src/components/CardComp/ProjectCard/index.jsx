@@ -28,7 +28,7 @@ const ProjectCard = ({ project }) => {
             {isCompleted ? "Completed" : "Awaiting feedback"}
           </span>
         </Card.Header>
-        <Card.Body className='p-3'>
+        <Card.Body className="p-3">
           <h6 className='font-weight-light text-capitalize'>Team</h6>
           <ScrollContainer style={{ cursor: "grab" }}>
             <div className='row p-0 m-0 width-max-content'>

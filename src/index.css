@@ -17,3 +17,7 @@ body, html, #root {
 .width-max-content {
   width: max-content;
 }
+
+.no-underline {
+  text-decoration: none !important;
+}

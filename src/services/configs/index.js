@@ -12,12 +12,12 @@ export const routes = {
   register: "/register",
   dashboard: "/dashboard",
   feedback: "/feedback",
-  cFeedback: "/feedback-completed",
+  cFeedback: "/feedback/completed",
   projects: "/projects",
-  projectDetails: "/projectDetails",
-  addDeveloper: "/add-developer",
+  projectDetails: "/projectDetails/:id",
   developers: "/developer",
-  techStack: "/tech-stack",
+  addDeveloper: "/developer/add",
+  techStack: "/techstack",
 };
 
 export const colors = {
