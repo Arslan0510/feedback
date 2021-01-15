@@ -32,3 +32,15 @@ export const techStackRename = (arr) => {
   });
   return modifiedArray;
 };
+
+export const developerNames = (arr) => {
+  let modifiedArray = [];
+  arr.forEach((element) => {
+    modifiedArray.push({
+      _id: element._id,
+      value: element.developerName,
+      label: element.developerName,
+    });
+  });
+  return modifiedArray;
+};

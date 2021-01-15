@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Button, Card } from "react-bootstrap";
+import { Badge, Card } from "react-bootstrap";
 
 import Photo from "./photo.jpg";
 import "./DCard.css";
@@ -12,8 +12,8 @@ const DCard = () => {
       </Badge>
       <Card.Img src={Photo} />
       <Card.Body>
-        <Card.Title>Rahul Yaduanshi</Card.Title>
-        <Card.Text>Nodia, U.P.</Card.Text>
+        <Card.Title>Musrafa Ahmed</Card.Title>
+        <Card.Text>Front-end Developer</Card.Text>
         <Card.Text>
           User interface designer and <br /> front-end developer
         </Card.Text>

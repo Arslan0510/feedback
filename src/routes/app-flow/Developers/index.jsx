@@ -36,8 +36,8 @@ const Developers = () => {
 
   return (
     <Layout title='Developers'>
-      <div class='container'>
-        <div class='row mb-2'>
+      <div className='container'>
+        <div className='row mb-2'>
           {developers.length !== 0 &&
             developers.map((dev) => (
               <DeveloperCard
@@ -49,7 +49,6 @@ const Developers = () => {
                 }
               />
             ))}
-          {/* <DCard /> */}
         </div>
       </div>
     </Layout>
