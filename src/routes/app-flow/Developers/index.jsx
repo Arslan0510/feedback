@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-import {DCard, DeveloperCard, Layout, Loader} from "../../../components";
+import {DCard, Layout, Loader} from "../../../components";
 import {allDevelopers} from "../../../store/actions";
 
 import "./developers.css";

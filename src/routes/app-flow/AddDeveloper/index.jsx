@@ -74,7 +74,7 @@ const AddDeveloper = () => {
   if (loading) return <Loader />;
 
   return (
-    <Layout title='Add New Developer'>
+    <Layout title='Developer'>
       <div className='container-contact100'>
         <div className='wrap-contact100'>
           <Formik
@@ -91,7 +91,7 @@ const AddDeveloper = () => {
                 handleChange={handleChange}
                 handleDropdown={handleDropdown}
                 handleSubmit={handleSubmit}
-                title='Add New Developer'
+                title='New Developer'
                 state={state}
                 setImageUri={setImageUri}
                 setState={setState}

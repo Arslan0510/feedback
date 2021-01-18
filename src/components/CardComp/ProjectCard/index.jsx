@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import {Card, Button} from "react-bootstrap";
+import {useHistory} from "react-router-dom";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 import "./card.css";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({project}) => {
   const {
     clientName,
     developers,
@@ -17,7 +17,7 @@ const ProjectCard = ({ project }) => {
   const history = useHistory();
 
   return (
-    <div className='col-4 p-3 m-0 position-relative'>
+    <div className='col-lg-4 col-md-6 col-sm-9 p-3 m-0 position-relative'>
       <Card className='w-100 m-0 position-relative'>
         <Card.Header className='row m-0 p-2 justify-content-between align-items-center'>
           <h5 className='font-weight-light  p-0 m-0'>{projectName}</h5>
@@ -28,13 +28,13 @@ const ProjectCard = ({ project }) => {
             {isCompleted ? "Completed" : "Awaiting feedback"}
           </span>
         </Card.Header>
-        <Card.Body className="p-3">
+        <Card.Body className='p-3'>
           <h6 className='font-weight-light text-capitalize'>Team</h6>
-          <ScrollContainer style={{ cursor: "grab" }}>
+          <ScrollContainer style={{cursor: "grab"}}>
             <div className='row p-0 m-0 width-max-content'>
-              {developers.map(({ developerName }, i) => (
+              {developers.map(({developerName}, i) => (
                 <Button
-                  style={{ cursor: "inherit" }}
+                  style={{cursor: "inherit"}}
                   variant='light'
                   size='sm'
                   className='p-1 px-3 m-1 rounded-pill border'>

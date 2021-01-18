@@ -1,19 +1,24 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Layout, Loader } from "../../../components";
-import { getDashBoardData } from "../../../store/actions";
-import { RecentProjects } from "./AdditionalComponents";
-
-const Dashboard = ({ history }) => {
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Layout, Loader} from "../../../components";
+import {getDashBoardData} from "../../../store/actions";
+import {checkArrayData} from "../../../services/utils";
+import {
+  DeveloperSection,
+  RecentProjects,
+  TechSection,
+} from "./AdditionalComponents";
+const Dashboard = ({history}) => {
   const [loading, setLoading] = useState(true);
+  const {dashboardData} = useSelector(
+    ({reducer_dashboard}) => reducer_dashboard
+  );
   const dispatch = useDispatch();
-  const { dashboardData } = useSelector(({ reducer_dashboard }) => reducer_dashboard);
   const {
     juniorDevelopers,
     midLevelDevelopers,
     recentFeedbacks,
     seniorDevelopers,
-    success,
     teamLeads,
     techStacks,
   } = dashboardData;
@@ -22,7 +27,7 @@ const Dashboard = ({ history }) => {
     getDashBoardData({
       dispatch,
       cbSuccess: () => setLoading(false),
-      cbFailure: () => setLoading(false)
+      cbFailure: () => setLoading(false),
     });
   }, []);
 
@@ -32,7 +37,33 @@ const Dashboard = ({ history }) => {
 
   return (
     <Layout title='Dashboard'>
-      <RecentProjects recentFeedbacks={recentFeedbacks} />
+      {checkArrayData(recentFeedbacks) && (
+        <RecentProjects recentFeedbacks={recentFeedbacks} />
+      )}
+      {checkArrayData(teamLeads) && (
+        <DeveloperSection developerList={teamLeads} title='Team Leads' />
+      )}
+      {checkArrayData(seniorDevelopers) && (
+        <DeveloperSection
+          developerList={seniorDevelopers}
+          title='Senior developers'
+        />
+      )}
+      {checkArrayData(midLevelDevelopers) && (
+        <DeveloperSection
+          developerList={midLevelDevelopers}
+          title='Mid Level developers'
+        />
+      )}
+      {checkArrayData(juniorDevelopers) && (
+        <DeveloperSection
+          developerList={juniorDevelopers}
+          title='Junior developers'
+        />
+      )}
+      {checkArrayData(techStacks) && (
+        <TechSection techStacks={techStacks} title='Tech Stack' />
+      )}
     </Layout>
   );
 };

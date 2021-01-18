@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Formik } from "formik";
-import { toast } from "react-toastify";
+import React, {useEffect, useState} from "react";
+import {Formik} from "formik";
+import {toast} from "react-toastify";
 
-import AddDevelopers from "./AddDevelopers";
-import { feedback, allDevelopers, getTeamLead } from "../../../store/actions";
-import { Dropdown, InputField, FormButton, Layout } from "../../../components";
-import { validationSchema, additionalValidation } from "./validation.schema";
+import {feedback, allDevelopers} from "../../../store/actions";
+import {
+  Dropdown,
+  InputField,
+  FormButton,
+  Layout,
+  Loader,
+} from "../../../components";
+import {validationSchema} from "./validation.schema";
 import {
   developerNames,
   teamLeadName,
-  techStackArray,
   removeEmptyStrings,
 } from "../../../services";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -17,7 +21,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import "./feedback.css";
 
 const AddFeedback = () => {
-  const [state, setState] = useState({ developers: [], teamLeads: [] });
+  const [state, setState] = useState({developers: [], teamLeads: []});
   const [developers, setDevelopers] = useState([]);
   const [teamLead, setTeamLead] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,9 +48,10 @@ const AddFeedback = () => {
   }, []);
 
   const _submitFeedback = (values) => {
-    // setFormikValues(values);
+    setFormikValues(values);
+    setLoading(true);
     feedback({
-      data: removeEmptyStrings({ ...values, developers }),
+      data: removeEmptyStrings({...values, developers}),
       cbSuccess: () => {
         toast.success("🦄 Feedback noted!");
         setLoading(false);
@@ -66,7 +71,7 @@ const AddFeedback = () => {
   const handleSubmit = (values) => {
     setLoading(true);
     feedback({
-      data: removeEmptyStrings({ ...values, developers, teamLead }),
+      data: removeEmptyStrings({...values, developers, teamLead}),
       cbSuccess: () => {
         toast.success("🦄 Feedback noted!");
         setLoading(false);
@@ -111,6 +116,8 @@ const AddFeedback = () => {
     } else if (title === "teamLead") setTeamLead(options.value);
   };
 
+  if (loading) return <Loader />;
+
   return (
     <Layout title='Feedback'>
       {alert}
@@ -154,11 +161,6 @@ const AddFeedback = () => {
                   asterisk={true}
                 />
 
-                {/* <AddDevelopers
-                  developers={developers}
-                  setDevelopers={setDevelopers}
-                /> */}
-
                 <Dropdown
                   dName='dev'
                   handleChange={handleDropdown}
@@ -198,30 +200,6 @@ const AddFeedback = () => {
                   asterisk={true}
                 />
 
-                {/* <InputField
-                  className='wrap-input100 border-0 bg1 rs1-wrap-input100'
-                  handleChange={handleChange("teamLeadName")}
-                  errors={errors.teamLeadName}
-                  touched={touched.teamLeadName}
-                  labelName='Team Lead Name'
-                  placeholder='Enter Team Lead Name'
-                  type='text'
-                  name='teamLeadName'
-                  asterisk={true}
-                />
-
-                <InputField
-                  className='wrap-input100 border-0 validate-input bg1 rs1-wrap-input100'
-                  handleChange={handleChange("teamLeadEmail")}
-                  errors={errors.teamLeadEmail}
-                  touched={touched.teamLeadEmail}
-                  labelName='Team Lead Email'
-                  placeholder='Enter Team Lead Email'
-                  type='email'
-                  name='teamLeadEmail'
-                  asterisk={false}
-                /> */}
-
                 <InputField
                   className='wrap-input100 border-0 bg1 rs1-wrap-input100'
                   handleChange={handleChange("projectManagerName")}
@@ -257,7 +235,7 @@ const AddFeedback = () => {
                     name='projectDescription'
                     onChange={handleChange("projectDescription")}
                     placeholder='Your message here...'></textarea>
-                  <p style={{ color: "red" }}>
+                  <p style={{color: "red"}}>
                     {errors.description &&
                       touched.description &&
                       errors.description}

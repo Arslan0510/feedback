@@ -1,6 +1,6 @@
 import React from "react";
 
-const NoContent = ({ title, imgSrc, picWidth, picHeight }) => {
+const NoContent = ({title, imgSrc, picWidth, picHeight}) => {
   return (
     <div className='d-flex flex-column w-100 h-100 justify-content-center align-items-center'>
       <img

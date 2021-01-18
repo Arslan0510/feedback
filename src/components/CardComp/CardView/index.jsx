@@ -1,9 +1,9 @@
 import React from "react";
-import { NoProjects } from "../../../assets";
+import {NoProjects} from "../../../assets";
 import NoContent from "../../OtherComp/NoContent";
 import ProjectCard from "../ProjectCard";
 
-const CardView = ({ list }) => {
+const CardView = ({list}) => {
   return (
     <div className='col-12 p-0 m-0'>
       {list.length !== 0 ? (

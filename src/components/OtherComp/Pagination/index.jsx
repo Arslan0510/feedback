@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
+const Pagination = ({itemsCount, pageSize, onPageChange, currentPage}) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
   if (pagesCount === 1) return null;
   const pages = _.range(1, pagesCount + 1);
 
   return (
     <nav>
-      <ul className='pagination paginationStyle'>
+      <ul className='pagination justify-content-end'>
         {pages.map((page) => (
           <li
             key={page}

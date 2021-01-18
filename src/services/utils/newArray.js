@@ -44,3 +44,7 @@ export const developerNames = (arr) => {
   });
   return modifiedArray;
 };
+
+export const checkArrayData = (array) => {
+  if (array.length > 0) return true;
+};
