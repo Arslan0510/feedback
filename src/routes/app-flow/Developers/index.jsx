@@ -32,7 +32,7 @@ const Developers = () => {
 
   return (
     <Layout title='Developers'>
-      <div className='container'>
+      <div className='w-100 h-100'>
         <div className='row mb-2'>
           {developers.length !== 0 &&
             developers.map((dev) => <DCard key={dev._id} developer={dev} />)}

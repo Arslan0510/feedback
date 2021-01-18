@@ -2,8 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Loader } from "../../../components";
 import { getDashBoardData } from "../../../store/actions";
-import { DashboardItem, RecentProjects } from "./AdditionalComponents";
-import firebase from "firebase";
+import { RecentProjects } from "./AdditionalComponents";
 
 const Dashboard = ({ history }) => {
   const [loading, setLoading] = useState(true);
@@ -33,9 +32,7 @@ const Dashboard = ({ history }) => {
 
   return (
     <Layout title='Dashboard'>
-      <DashboardItem title="Recent projects">
-        <RecentProjects recentFeedbacks={recentFeedbacks} />
-      </DashboardItem>
+      <RecentProjects recentFeedbacks={recentFeedbacks} />
     </Layout>
   );
 };

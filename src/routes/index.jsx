@@ -54,7 +54,7 @@ const index = ({ isAuthorized }) => {
                 <Route exact path={routes.addDeveloper} component={AddDeveloper} />
                 <Route exact path={routes.developers} component={Developers} />
                 <Route exact path={routes.techStack} component={TechStack} />
-                <Route path="*" component={NotFound} />
+                <Route path="*" component={Dashboard} />
               </Switch>
             </>
           )
