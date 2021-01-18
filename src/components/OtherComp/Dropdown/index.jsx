@@ -1,6 +1,5 @@
 import React from "react";
 import Select from "react-select";
-import AsyncSelect from "react-select/async";
 
 const Dropdown = ({
   dName,
