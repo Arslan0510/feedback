@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Layout, Loader} from "../../../components";
 import {getDashBoardData} from "../../../store/actions";
-import {checkArrayData} from "../../../services/utils";
+import {checkArrayData, techStackName} from "../../../services/utils";
 import {
   DeveloperSection,
   FilterDrawer,
@@ -13,6 +13,14 @@ import {
 const Dashboard = ({history}) => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [filter, setFilter] = useState({
+    recent_projects: true,
+    team_leads: true,
+    senior_developer: true,
+    mid_level_developer: true,
+    junior_developer: true,
+    tech_stack: true,
+  });
   const {dashboardData} = useSelector(
     ({reducer_dashboard}) => reducer_dashboard
   );
@@ -34,6 +42,23 @@ const Dashboard = ({history}) => {
     });
   }, []);
 
+  const handleDropdown = (options) => {
+    const finalArr = [];
+    teamLeads.forEach((el) =>
+      el.techStack.forEach((ele) =>
+        options.forEach((el2) => {
+          if (ele._id === el2.id) {
+            finalArr.push(el);
+          }
+        })
+      )
+    );
+    console.log(
+      "🚀 ~ file: index.jsx ~ line 47 ~ handleDropdown ~ finalArr",
+      finalArr
+    );
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -44,32 +69,39 @@ const Dashboard = ({history}) => {
       icon='fa-filter'
       title='Dashboard'
       onRefresh={() => setIsOpen(true)}>
-      <FilterDrawer isOpen={isOpen} isClose={() => setIsOpen(false)} />
-      {checkArrayData(recentFeedbacks) && (
+      <FilterDrawer
+        checked={filter}
+        isOpen={isOpen}
+        isClose={() => setIsOpen(false)}
+        handleChange={handleDropdown}
+        options={techStackName(techStacks)}
+        onChange={(value) => setFilter({...filter, [value]: !filter[value]})}
+      />
+      {checkArrayData(recentFeedbacks) && filter.recent_projects && (
         <RecentProjects recentFeedbacks={recentFeedbacks} />
       )}
-      {checkArrayData(teamLeads) && (
+      {checkArrayData(teamLeads) && filter.team_leads && (
         <DeveloperSection developerList={teamLeads} title='Team Leads' />
       )}
-      {checkArrayData(seniorDevelopers) && (
+      {checkArrayData(seniorDevelopers) && filter.senior_developer && (
         <DeveloperSection
           developerList={seniorDevelopers}
           title='Senior developers'
         />
       )}
-      {checkArrayData(midLevelDevelopers) && (
+      {checkArrayData(midLevelDevelopers) && filter.mid_level_developer && (
         <DeveloperSection
           developerList={midLevelDevelopers}
           title='Mid Level developers'
         />
       )}
-      {checkArrayData(juniorDevelopers) && (
+      {checkArrayData(juniorDevelopers) && filter.junior_developer && (
         <DeveloperSection
           developerList={juniorDevelopers}
           title='Junior developers'
         />
       )}
-      {checkArrayData(techStacks) && (
+      {checkArrayData(techStacks) && filter.tech_stack && (
         <TechSection techStacks={techStacks} title='Tech Stack' />
       )}
     </Layout>

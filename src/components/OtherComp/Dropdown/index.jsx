@@ -5,8 +5,6 @@ const Dropdown = ({
   dName,
   disable,
   handleChange,
-  handleInputChange,
-  loadOptions,
   multiSelect,
   options,
   selectedOption,
