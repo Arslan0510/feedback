@@ -1,6 +1,6 @@
 import Axios from "axios";
-import { memoryStrings } from "../configs";
-import { environment } from "./environment";
+import {memoryStrings} from "../configs";
+import {environment} from "./environment";
 
 const api = (endPoint, data) => {
   endPoint.data = data;
@@ -22,7 +22,7 @@ export const axiosGet = async ({
   guarded: isGuarded,
   testData,
 }) => {
-  //   console.log("[LINK TO BE APPROACHED] GET", testData);
+  // console.log("[LINK TO BE APPROACHED] GET", data);
   if (environment.mock) if (testData) return await mockAPI(testData);
   return await Axios.get(
     route + (data ? data : ""),
@@ -65,6 +65,6 @@ const mockAPI = (data) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("[THIS DATA IS COMING FROM A MOCK JSON]");
-      resolve({ data });
+      resolve({data});
     }, 500);
   });

@@ -1,6 +1,13 @@
 import React from "react";
 
-const Layout = ({ children, title, onRefresh, refreshBtnSize = 50 }) => {
+const Layout = ({
+  button,
+  children,
+  icon,
+  onRefresh,
+  refreshBtnSize = 50,
+  title,
+}) => {
   return (
     <div className='content-container h-100'>
       <div className='d-flex flex-column p-3 m-0 w-100 h-100'>
@@ -9,7 +16,7 @@ const Layout = ({ children, title, onRefresh, refreshBtnSize = 50 }) => {
           {onRefresh && (
             <button
               onClick={onRefresh}
-              className='shadow-sm btn-danger fa fa-undo'
+              className={`shadow-sm ${button} fa ${icon}`}
               style={{
                 width: refreshBtnSize,
                 height: refreshBtnSize,

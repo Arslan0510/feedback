@@ -5,11 +5,14 @@ import {getDashBoardData} from "../../../store/actions";
 import {checkArrayData} from "../../../services/utils";
 import {
   DeveloperSection,
+  FilterDrawer,
   RecentProjects,
   TechSection,
 } from "./AdditionalComponents";
+
 const Dashboard = ({history}) => {
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const {dashboardData} = useSelector(
     ({reducer_dashboard}) => reducer_dashboard
   );
@@ -36,7 +39,12 @@ const Dashboard = ({history}) => {
   }
 
   return (
-    <Layout title='Dashboard'>
+    <Layout
+      button='btn-primary'
+      icon='fa-filter'
+      title='Dashboard'
+      onRefresh={() => setIsOpen(true)}>
+      <FilterDrawer isOpen={isOpen} isClose={() => setIsOpen(false)} />
       {checkArrayData(recentFeedbacks) && (
         <RecentProjects recentFeedbacks={recentFeedbacks} />
       )}

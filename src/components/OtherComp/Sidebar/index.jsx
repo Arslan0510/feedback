@@ -24,8 +24,8 @@ const Sidebar = () => {
         />
       </div>
       <ul className='sidebar-navigation text-dark'>
-        {sidebar.map(({to, name, icon}) => (
-          <li>
+        {sidebar.map(({to, name, icon, id}) => (
+          <li key={id}>
             <Link to={to} className='text-dark'>
               <i className={`fa ${icon}`} aria-hidden='true' /> {name}
             </Link>

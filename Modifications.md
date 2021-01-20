@@ -21,3 +21,5 @@
   - Display all developers and feedbacks.
   - Developer card badges color should be different.
   - In Add Developer & Add Feedback page loader must be on whole page.
+  - Implement Lazy loading
+  - Filter on Dashboard
