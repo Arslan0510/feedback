@@ -13,6 +13,7 @@ export {default as InputField} from "./InputFieldComp/InputField";
 export {default as Layout} from "./OtherComp/Layout";
 export {default as Loader} from "./OtherComp/Loader";
 export {default as LazyLoadingButton} from "./ButtonComp/LazyLoadingButton";
+export {default as TechStackModal} from "./OtherComp/Modal";
 export {default as Pagination} from "./OtherComp/Pagination";
 export {default as ProjectCard} from "./CardComp/ProjectCard";
 export {default as Sidebar} from "./OtherComp/Sidebar";

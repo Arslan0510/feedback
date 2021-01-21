@@ -13,6 +13,7 @@ import {
 const Dashboard = ({history}) => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOptions, setDropdownOptions] = useState([]);
   const [filter, setFilter] = useState({
     recent_projects: true,
     team_leads: true,
@@ -25,7 +26,7 @@ const Dashboard = ({history}) => {
     ({reducer_dashboard}) => reducer_dashboard
   );
   const dispatch = useDispatch();
-  const {
+  var {
     juniorDevelopers,
     midLevelDevelopers,
     recentFeedbacks,
@@ -42,11 +43,13 @@ const Dashboard = ({history}) => {
     });
   }, []);
 
-  const handleDropdown = (options) => {
+  const applyFilter = () => {
     const finalArr = [];
+    console.log("dropdown options", dropdownOptions);
+    console.log("teamLeads", teamLeads);
     teamLeads.forEach((el) =>
       el.techStack.forEach((ele) =>
-        options.forEach((el2) => {
+        dropdownOptions.forEach((el2) => {
           if (ele._id === el2.id) {
             finalArr.push(el);
           }
@@ -70,10 +73,11 @@ const Dashboard = ({history}) => {
       title='Dashboard'
       onRefresh={() => setIsOpen(true)}>
       <FilterDrawer
+        applyFilter={applyFilter}
         checked={filter}
         isOpen={isOpen}
         isClose={() => setIsOpen(false)}
-        handleChange={handleDropdown}
+        handleChange={(options) => setDropdownOptions(options)}
         options={techStackName(techStacks)}
         onChange={(value) => setFilter({...filter, [value]: !filter[value]})}
       />

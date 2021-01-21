@@ -5,6 +5,7 @@ import {Dropdown} from "../../../../../components";
 import {filters} from "./filter-drawer";
 
 const FilterDrawer = ({
+  applyFilter,
   checked,
   isOpen,
   isClose,
@@ -42,13 +43,30 @@ const FilterDrawer = ({
             </label>
           </div>
         ))}
-        <h6>Stack filter</h6>
-        <Dropdown
-          handleChange={handleChange}
-          multiSelect={true}
-          options={options}
-          title='Select Tech Stack'
-        />
+        <section>
+          <h6>Project filter</h6>
+          <Dropdown
+            handleChange={handleChange}
+            multiSelect={true}
+            options={options}
+            title='Select Project Name'
+          />
+          <button className='btn btn-sm btn-primary mb-3' onClick={applyFilter}>
+            Apply filter
+          </button>
+        </section>
+        <section>
+          <h6>Stack filter</h6>
+          <Dropdown
+            handleChange={handleChange}
+            multiSelect={true}
+            options={options}
+            title='Select Tech Stack'
+          />
+          <button className='btn btn-sm btn-primary mb-3' onClick={applyFilter}>
+            Apply filter
+          </button>
+        </section>
       </div>
     </Slider>
   );

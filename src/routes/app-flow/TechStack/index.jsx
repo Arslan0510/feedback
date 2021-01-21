@@ -2,12 +2,21 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-import {Layout, Loader, TechStackCard} from "../../../components";
+import {
+  Layout,
+  Loader,
+  TechStackModal,
+  TechStackCard,
+} from "../../../components";
+import {findGivenValues, removeEmptyValues} from "../../../services";
 import {getTechStack, allDevelopers} from "../../../store/actions/app-flow";
 
 const TechStack = () => {
   const [loading, setLoading] = useState(false);
   const [dev, setDev] = useState(false);
+  const [arrDev, setArrDev] = useState([]);
+  const [techName, setTechName] = useState("");
+  const [modal, setModal] = useState(false);
   const {techStack} = useSelector((state) => state.reducer_developers);
   const dispatch = useDispatch();
 
@@ -39,13 +48,9 @@ const TechStack = () => {
   }, []);
 
   const handleClick = (techName) => {
-    var obj = [];
-    dev.forEach((el) =>
-      el.techStack.forEach((ele) => {
-        if (ele.name === techName) obj.push(el.developerName);
-      })
-    );
-    alert(obj);
+    setTechName(techName);
+    setArrDev(removeEmptyValues(findGivenValues(dev, techName)));
+    setModal(true);
   };
 
   if (loading) {
@@ -65,6 +70,12 @@ const TechStack = () => {
                 handleClick={handleClick}
               />
             ))}
+          <TechStackModal
+            modalIsOpen={modal}
+            setModalIsOpen={setModal}
+            arrDev={arrDev}
+            techName={techName}
+          />
         </div>
       </div>
     </Layout>
