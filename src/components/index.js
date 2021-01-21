@@ -16,6 +16,7 @@ export {default as LazyLoadingButton} from "./ButtonComp/LazyLoadingButton";
 export {default as TechStackModal} from "./OtherComp/Modal";
 export {default as Pagination} from "./OtherComp/Pagination";
 export {default as ProjectCard} from "./CardComp/ProjectCard";
+export {default as SearchBar} from "./OtherComp/SearchBar";
 export {default as Sidebar} from "./OtherComp/Sidebar";
 export {default as NoContent} from "./OtherComp/NoContent";
 export {default as TechStackCard} from "./CardComp/TechStackCard";

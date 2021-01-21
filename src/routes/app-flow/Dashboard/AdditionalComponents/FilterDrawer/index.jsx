@@ -44,18 +44,6 @@ const FilterDrawer = ({
           </div>
         ))}
         <section>
-          <h6>Project filter</h6>
-          <Dropdown
-            handleChange={handleChange}
-            multiSelect={true}
-            options={options}
-            title='Select Project Name'
-          />
-          <button className='btn btn-sm btn-primary mb-3' onClick={applyFilter}>
-            Apply filter
-          </button>
-        </section>
-        <section>
           <h6>Stack filter</h6>
           <Dropdown
             handleChange={handleChange}

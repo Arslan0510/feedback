@@ -56,10 +56,6 @@ const Dashboard = ({history}) => {
         })
       )
     );
-    console.log(
-      "🚀 ~ file: index.jsx ~ line 47 ~ handleDropdown ~ finalArr",
-      finalArr
-    );
   };
 
   if (loading) {

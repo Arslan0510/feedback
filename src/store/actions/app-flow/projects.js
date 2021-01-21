@@ -46,3 +46,23 @@ export const getAllProjects = async ({
     cbFailure(e.message);
   }
 };
+
+export const getProjectByName = async ({search, cbSuccess, cbFailure}) => {
+  try {
+    const {data} = await apis.projects();
+    if (search.byProjectName)
+      cbSuccess(
+        data.feedbacks.filter((el) => {
+          if (el.projectName === search.byProjectName) return el;
+        })
+      );
+    else
+      cbSuccess(
+        data.feedbacks.filter((el) => {
+          if (el.clientName === search.byClientName) return el;
+        })
+      );
+  } catch (e) {
+    cbFailure(e.message, e.response.data.error);
+  }
+};
