@@ -12,6 +12,13 @@ const endPoints = {
   register: new endPoint("/user/register", "POST", false, user),
   feedback: new endPoint("/feedback", "POST", true, projects),
   projects: new endPoint("/feedback/lazyFeedback", "GET", true, projects),
+  projectSearchByName: new endPoint("/feedback/project", "GET", true, projects),
+  projectSearchByClient: new endPoint(
+    "/feedback/client",
+    "GET",
+    true,
+    projects
+  ),
   completedProjects: new endPoint(
     "/feedback?isCompleted=true",
     "GET",

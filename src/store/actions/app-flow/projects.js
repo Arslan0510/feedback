@@ -1,5 +1,6 @@
 import {apis} from "../../../services";
 import {SET_PROJECTS, SET_COMPLETED_PROJECTS} from "../../constants";
+import buildUrl from "build-url";
 
 export const feedback = async ({data, cbSuccess, cbFailure}) => {
   try {
@@ -49,20 +50,18 @@ export const getAllProjects = async ({
 
 export const getProjectByName = async ({search, cbSuccess, cbFailure}) => {
   try {
-    const {data} = await apis.projects();
-    if (search.byProjectName)
-      cbSuccess(
-        data.feedbacks.filter((el) => {
-          if (el.projectName === search.byProjectName) return el;
-        })
+    if (search.byProjectName) {
+      const {data} = await apis.projectSearchByName(
+        `?search=${search.byProjectName}`
       );
-    else
-      cbSuccess(
-        data.feedbacks.filter((el) => {
-          if (el.clientName === search.byClientName) return el;
-        })
+      cbSuccess(data.feedbacks);
+    } else {
+      const {data} = await apis.projectSearchByClient(
+        `?search=${search.byClientName}`
       );
+      cbSuccess(data.feedbacks);
+    }
   } catch (e) {
-    cbFailure(e.message, e.response.data.error);
+    cbFailure(e.message);
   }
 };

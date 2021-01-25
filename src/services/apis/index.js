@@ -12,6 +12,9 @@ export const apis = {
   register: (data) => api(endPoints.register, data),
   feedback: (data) => api(endPoints.feedback, data),
   projects: (size) => api(endPoints.projects, size),
+  projectSearchByName: (search) => api(endPoints.projectSearchByName, search),
+  projectSearchByClient: (search) =>
+    api(endPoints.projectSearchByClient, search),
   completedProjects: () => api(endPoints.completedProjects),
   allDevelopers: () => api(endPoints.allDevelopers),
   developer: (data) => api(endPoints.developer, data),

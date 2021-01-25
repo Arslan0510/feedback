@@ -4,15 +4,7 @@ import "react-slide-out/lib/index.css";
 import {Dropdown} from "../../../../../components";
 import {filters} from "./filter-drawer";
 
-const FilterDrawer = ({
-  applyFilter,
-  checked,
-  isOpen,
-  isClose,
-  handleChange,
-  options,
-  onChange,
-}) => {
+const FilterDrawer = ({checked, isOpen, isClose, onChange}) => {
   return (
     <Slider
       footer={
@@ -43,18 +35,6 @@ const FilterDrawer = ({
             </label>
           </div>
         ))}
-        <section>
-          <h6>Stack filter</h6>
-          <Dropdown
-            handleChange={handleChange}
-            multiSelect={true}
-            options={options}
-            title='Select Tech Stack'
-          />
-          <button className='btn btn-sm btn-primary mb-3' onClick={applyFilter}>
-            Apply filter
-          </button>
-        </section>
       </div>
     </Slider>
   );

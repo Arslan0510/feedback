@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Layout, Loader} from "../../../components";
 import {getDashBoardData} from "../../../store/actions";
-import {checkArrayData, techStackName} from "../../../services/utils";
+import {checkArrayData} from "../../../services/utils";
 import {
   DeveloperSection,
   FilterDrawer,
@@ -10,10 +10,9 @@ import {
   TechSection,
 } from "./AdditionalComponents";
 
-const Dashboard = ({history}) => {
+const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOptions, setDropdownOptions] = useState([]);
   const [filter, setFilter] = useState({
     recent_projects: true,
     team_leads: true,
@@ -43,21 +42,6 @@ const Dashboard = ({history}) => {
     });
   }, []);
 
-  const applyFilter = () => {
-    const finalArr = [];
-    console.log("dropdown options", dropdownOptions);
-    console.log("teamLeads", teamLeads);
-    teamLeads.forEach((el) =>
-      el.techStack.forEach((ele) =>
-        dropdownOptions.forEach((el2) => {
-          if (ele._id === el2.id) {
-            finalArr.push(el);
-          }
-        })
-      )
-    );
-  };
-
   if (loading) {
     return <Loader />;
   }
@@ -69,12 +53,9 @@ const Dashboard = ({history}) => {
       title='Dashboard'
       onRefresh={() => setIsOpen(true)}>
       <FilterDrawer
-        applyFilter={applyFilter}
         checked={filter}
         isOpen={isOpen}
         isClose={() => setIsOpen(false)}
-        handleChange={(options) => setDropdownOptions(options)}
-        options={techStackName(techStacks)}
         onChange={(value) => setFilter({...filter, [value]: !filter[value]})}
       />
       {checkArrayData(recentFeedbacks) && filter.recent_projects && (
@@ -102,7 +83,7 @@ const Dashboard = ({history}) => {
         />
       )}
       {checkArrayData(techStacks) && filter.tech_stack && (
-        <TechSection techStacks={techStacks} title='Tech Stack' />
+        <TechSection developerList={techStacks} title='Tech Stack' />
       )}
     </Layout>
   );

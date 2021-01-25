@@ -9,7 +9,7 @@ import "./projects.css";
 import {SET_PROJECTS} from "../../../store/constants";
 import Filters from "./Filters";
 
-const Projects = ({history}) => {
+const Projects = () => {
   const [loading, setLoading] = useState(false);
   const [lazyLoading, setLazyLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

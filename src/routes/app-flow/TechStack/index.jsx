@@ -64,6 +64,7 @@ const TechStack = () => {
           {techStack.length !== 0 &&
             techStack.map((tech, i) => (
               <TechStackCard
+                footer={true}
                 tech={tech}
                 key={tech._id}
                 index={i}
