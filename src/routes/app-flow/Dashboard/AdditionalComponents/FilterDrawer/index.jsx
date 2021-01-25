@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slide-out";
 import "react-slide-out/lib/index.css";
-import {Dropdown} from "../../../../../components";
 import {filters} from "./filter-drawer";
 
 const FilterDrawer = ({checked, isOpen, isClose, onChange}) => {
