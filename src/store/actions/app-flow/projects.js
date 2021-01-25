@@ -1,6 +1,5 @@
 import {apis} from "../../../services";
 import {SET_PROJECTS, SET_COMPLETED_PROJECTS} from "../../constants";
-import buildUrl from "build-url";
 
 export const feedback = async ({data, cbSuccess, cbFailure}) => {
   try {
